@@ -5,7 +5,7 @@ namespace Gra_przegladarkowa.Models
     public class ErrorViewModel
     {
         public string RequestId { get; set; }
-        //test
+        //testowa zmiana
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
 }
