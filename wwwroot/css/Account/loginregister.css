@@ -1,0 +1,201 @@
+﻿body {
+    box-sizing: border-box;
+    margin: 0;
+   height:100%;
+}
+
+body, main::before {
+    background: url("../../images/account/EkranLogowania4Edited.jpg") 0/cover fixed;
+}
+
+main {
+    margin: 0 auto;
+    padding: 2em;
+    max-width: 111em;
+    background: rgba(255, 255, 255, 0.25) border-box;
+    overflow: hidden;
+    border-radius: .5em;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+    main::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: -30px;
+        z-index: -1;
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+    }
+
+label {
+    font: 142%/1.6 Baskerville, Palatino, serif;
+    color: white;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.text-danger {
+    font: 135%/1.6 Baskerville, Palatino, serif;
+    color: red;
+    text-shadow: -1px -1px 0 pink, 1px -1px 0 pink, -1px 1px 0 pink, 1px 1px 0 pink;
+}
+
+
+.card-body, .card, .card-header, .row, .container, .col-lg-6, .form-group, .col-lg-6, .col, .col-6, .col-xl-12, .col-md-6 {
+    background-color: transparent;
+    border: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+    .container-fluid{
+        margin-bottom: auto;
+        margin-top: auto;
+    }
+
+    .btn-login {
+        background-color: cornflowerblue;
+        -webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+        -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    }
+
+.btn-register {
+    background-color: orangered;
+    -webkit-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
+}
+
+.col-6 {
+    font: 250%/1.6 Baskerville, Palatino, serif;
+}
+
+
+
+
+
+/* demo display helpers */
+.taller {
+    min-height: 5em;
+}
+
+.border {
+    border: 1px solid #F00;
+}
+
+.border-light {
+    border: 1px dotted #ddd;
+}
+
+.h-50 {
+    height: 50vh;
+}
+
+
+.panel-login {
+    border-color: #ccc;
+    -webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+
+    .panel-login > .panel-heading {
+        color: #00415d;
+        border-color: #fff;
+        text-align: center;
+    }
+
+        .panel-login > .panel-heading a {
+            text-decoration: none;
+            color: #666;
+            font-weight: bold;
+            font-size: 15px;
+            -webkit-transition: all 0.1s linear;
+            -moz-transition: all 0.1s linear;
+            transition: all 0.1s linear;
+        }
+
+            .panel-login > .panel-heading a.active {
+                color: #029f5b;
+                font-size: 5px;
+            }
+
+        .panel-login > .panel-heading hr {
+            margin-top: 10px;
+            margin-bottom: 0px;
+            clear: both;
+            border: 0;
+            height: 1px;
+        }
+
+    .panel-login input[type="text"], .panel-login input[type="email"], .panel-login input[type="password"] {
+       
+        border: 1px solid #ddd;
+        font-size: 16px;
+        -webkit-transition: all 0.1s linear;
+        -moz-transition: all 0.1s linear;
+        transition: all 0.1s linear;
+    }
+
+    .panel-login input:hover,
+    .panel-login input:focus {
+        outline: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border-color: #ccc;
+    }
+
+.btn-login {
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #59B2E6;
+}
+
+    .btn-login:hover,
+    .btn-login:focus {
+        font-size: 20px;
+        color: #fff;
+        border-color: #53A3CD;
+    }
+
+.forgot-password {
+    font-size: 13px;
+    text-decoration: underline;
+    color: #888;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+    .forgot-password:hover,
+    .forgot-password:focus {
+        text-decoration: underline;
+        color: #666;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+.btn-register {
+    outline: none;
+    color: #fff;
+    font-size: 15px;
+    height: auto;
+    font-weight: normal;
+    padding: 14px 0;
+    text-transform: uppercase;
+    border-color: #1CB94A;
+}
+
+    .btn-register:hover,
+    .btn-register:focus {
+        font-size: 20px;
+        border-color: #1CA347;
+    }

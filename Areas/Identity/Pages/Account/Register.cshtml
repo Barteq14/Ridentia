@@ -1,0 +1,101 @@
+﻿@page
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+
+
+
+<div class=" h-100 container-fluid align-items-center">
+    <div class="row align-items-center">
+        <div class="col-lg-6 offset-md-3">
+            <div class="card text-white bg-login">
+                <div class="card-header">
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                        </div>
+                        <div class="col-6">
+                            <a class="actives nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12">
+
+                            <form asp-route-returnurl="@Model.ReturnUrl" method="post">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="form-group">
+
+                                    <center>
+                                        <label asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control" placeholder="Email" value="" tabindex="1"> <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </center>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <center>
+                                        <label asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" class="form-control" placeholder="Has&#x142;o"
+                                               value="" tabindex="2"> <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </center>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <center>
+                                        <label asp-for="Input.ConfirmPassword"></label>
+                                        <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Has&#x142;o"
+                                               value="" tabindex="2"> <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                    </center>
+
+                                </div>
+
+                               
+
+                                <div class="form-group">
+                                    <div class="row align-items-center">
+                                        <div class="col-md-6 offset-sm-3">
+                                            <button type="submit" tabindex="4" class="form-control btn btn-register">Zaloguj</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-12">
+                                            <div class="text-center">
+                                                <a id="forgot-password" asp-page="./ForgotPassword">Zapomnia&#x142;e&#x15B; has&#x142;o?</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/account/loginregister.css" />
+
+}
