@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\css\AfterLogin\" />
+    <Folder Include="wwwroot\css\CreateCharacter\" />
   </ItemGroup>
 
 </Project>

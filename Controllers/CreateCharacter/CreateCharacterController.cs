@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Gra_przegladarkowa.Controllers.NewFolder
 {
-    public class AfterLoginController : Controller
+    public class CreateCharacterController : Controller
     {
         public IActionResult Index()
         {

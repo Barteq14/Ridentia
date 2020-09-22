@@ -5,11 +5,11 @@
 }
 
 body, main::before {
-    background: url("../../images/account/EkranLogowania4Edited.jpg") 0/cover fixed;
+    background: url("../../images/account/EkranLogowania1.jpg") 0/cover fixed;
 }
 
 main {
-    margin: 0 auto;
+    margin: 10% auto;
     padding: 2em;
     max-width: 111em;
     background: rgba(255, 255, 255, 0.25) border-box;
@@ -17,6 +17,7 @@ main {
     border-radius: .5em;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset, 0 0.5em 1em rgba(0, 0, 0, 0.6);
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
+
 }
 
     main::before {
