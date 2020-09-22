@@ -1,0 +1,17 @@
+﻿body {
+}
+
+body, main::before {
+    background: url("../../images/CreateCharacter/background3.jpg") 0/cover fixed;
+    font-family: 'Lato', sans-serif;
+    
+}
+
+.page {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: white;
+    opacity: .5;
+}

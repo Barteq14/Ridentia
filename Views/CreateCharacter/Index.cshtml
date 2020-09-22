@@ -3,11 +3,28 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/CreateCharacter/index.css" />
+}
 
 
-<div class="container" style="border: solid; border-color: black;">
+<div class="container text-center page">
+    <div class="row">
+        <div class="col-12">Wybierz swoją nazwę:</div>
+        <div class="col-12"><input /></div>
+    </div>
 
-    asdasd
+
+    <!-- generowane będzie potem z automatu-->
+    <div class="row">
+        <div class="col-md-4">Wojownik</div>
+        <div class="col-md-4">Barbażyńca</div>
+        <div class="col-md-4">Zabójca</div>
+        <div class="col-md-4">Łucznik</div>
+        <div class="col-md-4">Adept</div>
+        <div class="col-md-4">Druid</div>
+    </div>
+   
 
 </div>
