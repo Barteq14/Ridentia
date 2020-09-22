@@ -12,6 +12,7 @@ using Gra_przegladarkowa.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Gra_przegladarkowa.DAL;
 
 namespace Gra_przegladarkowa
 {
@@ -30,8 +31,16 @@ namespace Gra_przegladarkowa
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            //us³uga dodaj¹ca typ kontekstu (wstrzykniêcie zale¿noœci)
+            services.AddDbContext<RidentiaDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("RidentiaConnection"))); // nazwa po³¹czenia z baz¹ danych - RidentiaConnection (plik appsetting.json)
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
