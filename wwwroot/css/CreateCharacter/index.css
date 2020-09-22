@@ -1,17 +1,89 @@
 ﻿body {
 }
 
+/** background start**/
 body, main::before {
     background: url("../../images/CreateCharacter/background3.jpg") 0/cover fixed;
     font-family: 'Lato', sans-serif;
     
 }
+/** background end**/
 
+/** page start **/
 .page {
     position: absolute;
-    top: 20%;
+    top: 15%;
     left: 50%;
     transform: translate(-50%);
-    background-color: white;
-    opacity: .5;
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 1rem;
 }
+.characterNameText{
+    margin-top: 1rem;
+}
+
+#characterNameInput {
+    margin-top: 2rem;
+}
+
+label, .characterNameText {
+    font: 142%/1.6 Baskerville, Palatino, serif;
+    color: black;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+}
+/** page end **/
+
+/** card character start **/
+.chooseCharacter{
+    position: relative;
+}
+.cardCharacter {
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+}
+
+.cardCharacter img{
+    width: 80%;
+    border-radius: 8px;
+}
+
+.flipcard {
+    position: relative;
+    transition: .8s;
+    transform-style: preserve-3d;
+}
+
+.flipcard .front {
+    position: absolute;
+    backface-visibility: hidden;
+    transition: .8s;
+    transform-style: preserve-3d;
+    z-index: 100;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+}
+
+
+.flipcard .back {
+    position: absolute;
+    backface-visibility: hidden;
+    transition: .8s;
+    transform-style: preserve-3d;
+    z-index: 99;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
+    background: #fff;
+    height: 300px;
+    transform: rotateY(180deg);
+}
+
+.cardCharacter:hover .front {
+    transform: rotateY(-180deg);
+}
+
+.cardCharacter:hover .back {
+    transform: rotateY(0deg);
+}
+
+/** card character end **/

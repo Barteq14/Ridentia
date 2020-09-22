@@ -10,21 +10,36 @@
 
 
 <div class="container text-center page">
-    <div class="row">
-        <div class="col-12">Wybierz swoją nazwę:</div>
-        <div class="col-12"><input /></div>
-    </div>
+    <form>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="col-12 characterNameText"><h1>Witaj przybyszu!</h1></div>
+                <label for="nameCharacterInput">Wpisz swoją nazwę:</label>
+                <input type="text" class="form-control" id="nameCharacterInput">
+            </div>
+        </div>
 
 
-    <!-- generowane będzie potem z automatu-->
-    <div class="row">
-        <div class="col-md-4">Wojownik</div>
-        <div class="col-md-4">Barbażyńca</div>
-        <div class="col-md-4">Zabójca</div>
-        <div class="col-md-4">Łucznik</div>
-        <div class="col-md-4">Adept</div>
-        <div class="col-md-4">Druid</div>
-    </div>
-   
+        <!-- generowane będzie potem z automatu-->
+        <div class="row justify-content-center chooseCharacter">
+            <div class="col-md-4 justify-content-center cardCharacter">
+                <div class="flipcard">
+                    <div class="front">
+                        <img src="~/Images/CreateCharacter/Characters/warrior.png" class="img-fluid"/>
+                        Wybierz
+                    </div>
+                    asdasd
+                    <div class="back">Opis postaci:</div>
+                </div>
+            </div>
 
+
+            <div class="col-md-4">Barbażyńca</div>
+            <div class="col-md-4">Zabójca</div>
+            <div class="col-md-4">Łucznik</div>
+            <div class="col-md-4">Adept</div>
+            <div class="col-md-4">Druid</div>
+        </div>
+ 
+    </form>
 </div>
