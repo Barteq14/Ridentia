@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Gra_przegladarkowa.Services;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
@@ -89,8 +90,14 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = user.Id, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Potwierdź email",
-                        $"Potwierdź konto <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.");
+                    SendMail email = new SendMail();
+
+                    string msg = $"Potwierdź konto <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>."; ;
+
+                    email.SendEmail(Input.Email, "Rejestracja - Ridentia", msg);
+
+
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
