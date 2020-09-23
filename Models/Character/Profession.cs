@@ -23,6 +23,9 @@ namespace Gra_przegladarkowa.Models.Character
         public int Strenght { get; set; }
         [Required]
         [Range(0, 1000)]
+        public int Dexterity { get; set; }
+        [Required]
+        [Range(0, 1000)]
         public int Armor { get; set; }
         [Required]
         [Range(0, 1000)]

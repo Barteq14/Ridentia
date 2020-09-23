@@ -12,6 +12,11 @@ namespace Gra_przegladarkowa.Models
         [Required]
         public int ProfileID { get; set; }
         [Required]
+        [DataType(DataType.EmailAddress)]
+        [MaxLength(150)]
+        [EmailAddress(ErrorMessage = "Wrong e-mail address!")]
+        public string UserName { get; set; }
+        [Required]
         [Range(0,2)]
         public int AccountBan { get; set; }
     }
