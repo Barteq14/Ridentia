@@ -12,11 +12,12 @@ body, main::before {
 /** page start **/
 .page {
     position: absolute;
-    top: 15%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%);
     background-color: rgba(255, 255, 255, 0.25);
     border-radius: 1rem;
+    margin-bottom: 2rem;
 }
 .characterNameText{
     margin-top: 1rem;
@@ -33,57 +34,38 @@ label, .characterNameText {
 }
 /** page end **/
 
-/** card character start **/
-.chooseCharacter{
+
+/** card second character start **/
+.row .card{
+    margin: 20px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+    overflow: hidden;   
+}
+
+.card .circle {
+    width: 100%;
+    clip-path: circle(180px at center 0);
+    background-color: rgba(0,0,0, 0.7);
+    overflow: hidden;
+}
+.card .content{
+    margin-top: -5rem;
+}
+.card p{
+    color: #111;
+    padding: .5rem;
+}
+.card .content button{
     position: relative;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0, 0.7);
+    margin-bottom: 1rem;
+    border-radius: 4rem;
 }
-.cardCharacter {
-    position: relative;
-    perspective: 1000px;
-    transform-style: preserve-3d;
+.card .content button a {
+    text-decoration: none;
+    color: white;
 }
-
-.cardCharacter img{
-    width: 80%;
-    border-radius: 8px;
-}
-
-.flipcard {
-    position: relative;
-    transition: .8s;
-    transform-style: preserve-3d;
-}
-
-.flipcard .front {
-    position: absolute;
-    backface-visibility: hidden;
-    transition: .8s;
-    transform-style: preserve-3d;
-    z-index: 100;
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
-}
-
-
-.flipcard .back {
-    position: absolute;
-    backface-visibility: hidden;
-    transition: .8s;
-    transform-style: preserve-3d;
-    z-index: 99;
-    border-radius: 8px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .5);
-    background: #fff;
-    height: 300px;
-    transform: rotateY(180deg);
-}
-
-.cardCharacter:hover .front {
-    transform: rotateY(-180deg);
-}
-
-.cardCharacter:hover .back {
-    transform: rotateY(0deg);
-}
-
-/** card character end **/
+    /** card second character end **/
