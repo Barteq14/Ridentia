@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.WebUtilities;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
+
+    
     [AllowAnonymous]
     public class RegisterConfirmationModel : PageModel
     {
@@ -42,6 +44,8 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
             Email = email;
             // Once you add a real email sender, you should remove this code that lets you confirm the account
+
+            /*
             DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
             {
@@ -54,6 +58,8 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
             }
+
+            */
 
             return Page();
         }

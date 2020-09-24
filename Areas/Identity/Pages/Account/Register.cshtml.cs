@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Gra_przegladarkowa.Services;
+using System.IO;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
@@ -92,7 +93,20 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                     SendMail email = new SendMail();
 
-                    string msg = $"Potwierdź konto <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>."; ;
+
+                    /*
+                    //var path1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/EmailConfirmTemplate1.txt");
+                    StreamReader str = new StreamReader("Areas\\Identity\\Pages\\Account\\EmailConfirmTemplate1.txt");
+                    string part1 = str.ReadToEnd();
+                    str.Close();
+
+                    //var path2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/EmailConfirmTemplate2.txt");
+                    StreamReader str2 = new StreamReader("Areas\\Identity\\Pages\\Account\\EmailConfirmTemplate2.txt");
+                    string part2 = str2.ReadToEnd();
+                    str2.Close();
+                    */
+
+                    string msg = $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Kliknij na link, aby aktywować konto!</a>.";
 
                     email.SendEmail(Input.Email, "Rejestracja - Ridentia", msg);
 

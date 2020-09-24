@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+</head>
+
+<style>
+
+
+
+
+    table,
+    td {
+        mso-table-lspace: 0pt !important;
+        mso-table-rspace: 0pt !important;
+        height: 50%;
+    }
+
+    table {
+        border-spacing: 0 !important;
+        border-collapse: collapse !important;
+        table-layout: fixed !important;
+        margin: 0 auto !important;
+    }
+</style>
+
+<!-- CSS Reset : END -->
+<!-- Progressive Enhancements : BEGIN -->
+<style>
+
+    .primary {
+        background: #f1c638;
+    }
+
+    .bg_black {
+        background: rgba(0,0,0,.86);
+    }
+
+
+    .btn {
+        padding: 5px 15px;
+        display: inline-block;
+    }
+
+        .btn.btn-black {
+            border-radius: 125px;
+            background: blue;
+        }
+
+    h1 {
+        font: 350%/1.6 Baskerville, Palatino, serif;
+        font-size: 66px;
+        color: white;
+        text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -2px black;
+    }
+
+    a {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        font-size: 25px;
+        letter-spacing: -0.2px;
+        word-spacing: -0.2px;
+        font-weight: 700;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        color: #AFEEEE;
+        text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    }
+
+        a:hover, a:active {
+            font-family: "Trebuchet MS", Helvetica, sans-serif;
+            font-size: 24px;
+            letter-spacing: -0.2px;
+            word-spacing: -0.2px;
+            font-weight: 700;
+            text-decoration: none;
+            font-style: normal;
+            font-variant: normal;
+            text-transform: none;
+            color: #ff6600;
+            background-color: blue;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+        }
+
+
+
+    body {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.2;
+    }
+
+    ul.social li {
+        display: inline-block;
+        margin-right: 10px;
+    }
+    /*FOOTER*/
+
+    .footer {
+        color: rgba(255,255,255,.86);
+    }
+
+    .header {
+        color: rgba(255,255,255,.86);
+    }
+</style>
+
+
+</head>
+
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: #f1f1f5;">
+    <center style="width: 100%; background-color: #f1f1f5;">
+        <div style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+        </div>
+        <div style="max-width: 600px; margin: 0 auto;">
+            <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="86" width="100%">
+                <tr>
+                    <td class="bg_black header">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+
+                            <center>
+
+                                <h1>Ridentia</h1>
+
+                            </center>
+
+
+                        </table>
+                    </td>
+                </tr><!-- end tr -->
+                <tr>
+                    <td valign="middle">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                            <tr>
+                                <td valign="middle" width="50%">
+                                    <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                        <tr>
+                                            <td>
+                                                <img src="https://images.tinypic.pl/i/01014/pdg4ojz86p8y.jpg" alt="../../images/account/ConfirmEmail.jpg" style="width: 100%; margin: auto; margin-top: -105px; height: 174%; display: block;">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td valign="middle" width="41%" class="primary">
+                                    <table role="presentation" cellspacing="0" cellpadding="15" border="0" width="98%">
+                                        <tr>
+                                            <td>
+                                                <center>
+
+
+
+
+                                                    <br><br><br><br>
