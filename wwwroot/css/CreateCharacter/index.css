@@ -19,8 +19,10 @@ body, main::before {
     border-radius: 1rem;
     margin-bottom: 2rem;
 }
-.characterNameText{
+.characterNameText {
     margin-top: 1rem;
+    letter-spacing: .1rem;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #000;
 }
 
 #characterNameInput {
@@ -28,9 +30,9 @@ body, main::before {
 }
 
 label, .characterNameText {
-    font: 142%/1.6 Baskerville, Palatino, serif;
+    font: 165%/1.6 Baskerville, Palatino, serif;
     color: black;
-    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #000;
 }
 /** page end **/
 
@@ -51,7 +53,7 @@ label, .characterNameText {
     overflow: hidden;
 }
 .card .content{
-    margin-top: -5rem;
+    
 }
 .card p{
     color: #111;
@@ -68,4 +70,109 @@ label, .characterNameText {
     text-decoration: none;
     color: white;
 }
-    /** card second character end **/
+  /** card second character end **/
+
+  /** mobile start**/
+@media only screen and (max-width: 1200px){
+
+    .card .circle {
+        clip-path: circle(140px at center 0);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .card .circle {
+        clip-path: circle(160px at center 0);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .card .circle {
+        clip-path: circle(115px at center 0);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    .page {
+        top: 0;
+        margin-bottom: 0;
+    }
+
+    .card .circle {
+        clip-path: circle(110px at center 0);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    .card .circle {
+        clip-path: circle(265px at center 0);
+    }
+}
+
+@media only screen and (max-width: 535px) {
+
+    .card .circle {
+        clip-path: circle(250px at center 0);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .card .circle {
+        clip-path: circle(230px at center 0);
+    }
+}
+
+@media only screen and (max-width: 460px) {
+
+    .card .circle {
+        clip-path: circle(210px at center 0);
+    }
+}
+
+@media only screen and (max-width: 430px) {
+
+    .card .circle {
+        clip-path: circle(190px at center 0);
+    }
+}
+
+@media only screen and (max-width: 390px) {
+
+    .card .circle {
+        clip-path: circle(170px at center 0);
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+    .card .circle {
+        clip-path: circle(150px at center 0);
+    }
+}
+
+@media only screen and (max-width: 325px) {
+
+    .card .circle {
+        clip-path: circle(130px at center 0);
+    }
+}
+
+@media only screen and (max-width: 295px) {
+
+    .card .circle {
+        clip-path: circle(110px at center 0);
+    }
+}
+
+@media only screen and (max-width: 265px) {
+
+    .card .circle {
+        clip-path: circle(100px at center 0);
+    }
+}
+  /** mobile end**/
