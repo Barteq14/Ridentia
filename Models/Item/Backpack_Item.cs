@@ -13,11 +13,11 @@ namespace Gra_przegladarkowa.Models.Item
         [Required]
         public int BackpackItemID { get; set; }
 
-        public int ItemID { get; set; }
-        [ForeignKey("ItemID")]
+        public int? ItemID { get; set; }
+        [ForeignKey("ItemID"),Column(Order = 0)]
         public virtual Item Item { get; set; }
-        public int BackpackID { get; set; }
-        [ForeignKey("BackpackID")]
+        public int? BackpackID { get; set; }
+        [ForeignKey("BackpackID"), Column(Order = 1)]
         public virtual Backpack Backpack { get; set; }
     }
 }

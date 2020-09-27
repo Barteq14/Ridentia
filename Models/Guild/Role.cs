@@ -16,11 +16,11 @@ namespace Gra_przegladarkowa.Models.Guild
         [DataType(DataType.Text)]
         [MaxLength(100)]
         public string NameRole { get; set; }
-        public int GuildID { get; set; }
-        [ForeignKey("GuildID")]
+        public int? GuildID { get; set; }
+        [ForeignKey("GuildID"), Column(Order = 0)]
         public virtual Guild Guild { get; set; }
-        public int MemberID { get; set; }
-        [ForeignKey("MemberID")]
+        public int? MemberID { get; set; }
+        [ForeignKey("MemberID"), Column(Order = 1)]
         public virtual Member Member { get; set; }
     }
 }

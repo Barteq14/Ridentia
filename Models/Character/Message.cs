@@ -28,11 +28,11 @@ namespace Gra_przegladarkowa.Models.Character
         [DataType(DataType.Text)]
         [MaxLength(150)]
         public string Status { get; set; }
-        public int Sender { get; set; }
-        [ForeignKey("Sender")]
+        public int? Sender { get; set; }
+        [ForeignKey("Sender"), Column(Order = 0)]
+        public int? Receiver { get; set; }
+        [ForeignKey("Receiver"), Column(Order = 1)]
         public virtual Character Character { get; set; }
-        public int Receiver { get; set; }
-        [ForeignKey("Receiver")]
         public virtual Character Character2 { get; set; }
     }
 }

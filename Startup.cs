@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Gra_przegladarkowa.DAL;
+using Microsoft.AspNetCore.Http;
 
 namespace Gra_przegladarkowa
 {
@@ -40,6 +41,7 @@ namespace Gra_przegladarkowa
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -12,11 +12,11 @@ namespace Gra_przegladarkowa.Models.Item
         [Key]
         [Required]
         public int CurrentEquipmentItemID { get; set; }
-        public int ItemID { get; set; }
-        [ForeignKey("ItemID")]
+        public int? ItemID { get; set; }
+        [ForeignKey("ItemID"), Column(Order = 0)]
         public virtual Item Item { get; set; }
-        public int CurrentEquipmentID { get; set; }
-        [ForeignKey("CurrentEquipmentID")]
+        public int? CurrentEquipmentID { get; set; }
+        [ForeignKey("CurrentEquipmentID"), Column(Order = 1)]
         public virtual CurrentEquipment CurrentEquipment { get; set; }
     }
 }

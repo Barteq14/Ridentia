@@ -15,13 +15,15 @@ namespace Gra_przegladarkowa.DAL
         public static void Initialize(RidentiaDbContext context)
         {
             context.Database.EnsureCreated();
-
-            if (context.Characters.Any())
+            
+            if (context.Levels.Any())
             {
                 return;   // DB has been seeded
             }
-
+            
+            
              /*################################### CHARACTERS*/
+             /*
             // characters
             var characters = new Character[]
             {
@@ -44,7 +46,7 @@ namespace Gra_przegladarkowa.DAL
                 context.Friends.Add(f);
             }
             context.SaveChanges();
-
+            */
             // levels
             var levels = new Level[]
             {
@@ -157,14 +159,14 @@ namespace Gra_przegladarkowa.DAL
                 new Level { NameLevel = "Level 107", ReceivedPoint = 30, RequiredExp = 232},
                 new Level { NameLevel = "Level 108", ReceivedPoint = 30, RequiredExp = 234},
                 new Level { NameLevel = "Level 109", ReceivedPoint = 30, RequiredExp = 236},
-                new Level { NameLevel = "Level 110", ReceivedPoint = 32, RequiredExp = 238},
+                new Level { NameLevel = "Level 110", ReceivedPoint = 32, RequiredExp = 238}
             };
             foreach (Level l in levels)
             {
                 context.Levels.Add(l);
             }
             context.SaveChanges();
-
+            /*
             // messages
             var messages = new Message[]
             {
@@ -175,23 +177,23 @@ namespace Gra_przegladarkowa.DAL
                 context.Messages.Add(m);
             }
             context.SaveChanges();
-
+            */
             // professions
             var professions = new Profession[]
             {
-                new Profession { NameProfession = "Wojownik", Hp = 1500, Armor = 500, Strenght = 15, Dexterity = 20, Vitality = 10, Resistance = 10, BlockHit = 15, Inteligance = 10 },
-                new Profession { NameProfession = "Barbarzyńca", Hp = 1500, Armor = 500, Strenght = 20, Dexterity = 20, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 },
-                new Profession { NameProfession = "Zabójca", Hp = 1500, Armor = 500, Strenght = 15, Dexterity = 25, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10   },
-                new Profession { NameProfession = "Adept", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 15, Resistance = 20, BlockHit = 15, Inteligance = 15   },
-                new Profession { NameProfession = "Druid", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 15, Vitality = 15, Resistance = 15, BlockHit = 10, Inteligance = 20   },
-                new Profession { NameProfession = "Łucznik", Hp = 1500, Armor = 500, Strenght = 15, Dexterity = 25, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10   },
+                new Profession { NameProfession = "Wojownik", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 ,NameSpecialMove ="Jego tarcza płonie co zadaje dodatkowe obrażenia oraz podwyższa punkty życia" , ImageProfessionName ="", SpecialMoveTurnRequired = 20},
+                new Profession { NameProfession = "Barbarzyńca", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10, NameSpecialMove ="Podwyższenie pancerza o 200 punktów przed każda walką" , ImageProfessionName ="", SpecialMoveTurnRequired = 20 },
+                new Profession { NameProfession = "Zabójca", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 , NameSpecialMove ="Co pewną ilość ataków wyrzuca sztylet w przeciwnika" , ImageProfessionName ="", SpecialMoveTurnRequired = 20  },
+                new Profession { NameProfession = "Adept", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 , NameSpecialMove ="Posyła magiczną kulę która wybuch na przeciwniku co 5 atak" , ImageProfessionName ="", SpecialMoveTurnRequired = 20  },
+                new Profession { NameProfession = "Druid", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 20  ,NameSpecialMove ="Przywracanie pewnej ilości punktów zrowia co 3 atak" , ImageProfessionName ="", SpecialMoveTurnRequired = 20  },
+                new Profession { NameProfession = "Łucznik", Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10  ,NameSpecialMove ="Atak 3 strzałami na raz" , ImageProfessionName ="", SpecialMoveTurnRequired = 20  }
             };
             foreach (Profession p in professions)
             {
                 context.Professions.Add(p);
             }
             context.SaveChanges();
-
+            /*
             // statistics
             var statistics = new Statistic[]
             {
@@ -212,7 +214,7 @@ namespace Gra_przegladarkowa.DAL
                 new Work { Name = "Rybak" , Description = "Łowisz ryby", RevardExp = 100, RevardGold = 1000, WorkTime = 2 },
                 new Work { Name = "Piekarz" , Description = "Wypiekasz żywność", RevardExp = 100, RevardGold = 2000, WorkTime = 4 },
                 new Work { Name = "Rzeźnik" , Description = "Brudna robota wymagająca twardej ręki", RevardExp = 100, RevardGold = 1500, WorkTime = 10 },
-                new Work { Name = "Najemnik" , Description = "Pracujesz dla szefa w celu wyeliminowania jego przeciwników", RevardExp = 100, RevardGold = 1000, WorkTime = 8 },
+                new Work { Name = "Najemnik" , Description = "Pracujesz dla szefa w celu wyeliminowania jego przeciwników", RevardExp = 100, RevardGold = 1000, WorkTime = 8 }
             };
             foreach (Work w in works)
             {
@@ -222,6 +224,7 @@ namespace Gra_przegladarkowa.DAL
 
 
             /*################################### GUILD*/
+            /*
             // buildings
             var buildings = new Building[]
             {
@@ -229,7 +232,7 @@ namespace Gra_przegladarkowa.DAL
                 new Building { NameBuilding = "Bank" , Description = "Dzięki temu budynkowi możesz wpłacać pieniądze do wspólnej kieszeni", Level = 1, CostUpgrade = 5000},
                 new Building { NameBuilding = "Pole treningowe" , Description = "Zmniejszone koszta treningu", Level = 1, CostUpgrade = 5000},
                 new Building { NameBuilding = "Magazyn" , Description = "Przechowywanie różnych przedmiotów", Level = 1, CostUpgrade = 5000},
-                new Building { NameBuilding = "Łaźnia" , Description = "Możliwość odpoczynku", Level = 1, CostUpgrade = 5000},
+                new Building { NameBuilding = "Łaźnia" , Description = "Możliwość odpoczynku", Level = 1, CostUpgrade = 5000}
             };
             foreach (Building b in buildings)
             {
@@ -302,13 +305,13 @@ namespace Gra_przegladarkowa.DAL
                 context.RaportGuilds.Add(r);
             }
             context.SaveChanges();
-
+            */
             // roles
             var roles = new Role[]
             {
                 new Role { NameRole = "Członek" },
                 new Role { NameRole = "Admin" },
-                new Role { NameRole = "Władca" },
+                new Role { NameRole = "Władca" }
             };
             foreach (Role ro in roles)
             {
@@ -318,6 +321,7 @@ namespace Gra_przegladarkowa.DAL
 
 
             /*################################### ITEMS*/
+            /*
             // backpacks
             var backpacks = new Backpack[]
             {
@@ -339,7 +343,7 @@ namespace Gra_przegladarkowa.DAL
                 context.Backpack_Items.Add(bi);
             }
             context.SaveChanges();
-
+            */
             // categoryItem
             var categoryitems = new CategoryItem[]
             {
@@ -359,7 +363,7 @@ namespace Gra_przegladarkowa.DAL
                 context.CategoryItems.Add(c);
             }
             context.SaveChanges();
-
+            /*
             // currentEquipment
             var currentEquipments = new CurrentEquipment[]
             {
@@ -397,8 +401,9 @@ namespace Gra_przegladarkowa.DAL
             }
             context.SaveChanges();
 
-
+            */
             /*################################### Mission*/
+            /*
             // missions
             var missions = new Missions[]
             {
@@ -445,8 +450,9 @@ namespace Gra_przegladarkowa.DAL
             }
             context.SaveChanges();
 
-
+            */
             /*################################### User*/
+            /*
             // profiles
             var profiles = new Profile[]
             {
@@ -457,6 +463,7 @@ namespace Gra_przegladarkowa.DAL
                 context.Profiles.Add(prof);
             }
             context.SaveChanges();
+            */
         }
     }
 }
