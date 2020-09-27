@@ -1,6 +1,9 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    await Html.RenderPartialAsync("_LoginPartial");
 }
+
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -14,7 +17,6 @@
 
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Register</a>
     <a class="nav-link" asp-area="Identity" asp-page="/Account/Login">Login</a>
-    <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/">Zarządzanie kontem</a>
     <a class="nav-link" asp-area="" asp-controller="CreateCharacter" asp-action="Index">create character</a>
 
 

@@ -66,10 +66,16 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             /*      Captcha     */
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
 
-            if (!string.IsNullOrEmpty(ErrorMessage))
+
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("index");
+            }
+
+                if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 ModelState.AddModelError(string.Empty, ErrorMessage);
             }
@@ -87,6 +93,8 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
