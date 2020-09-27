@@ -13,6 +13,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Gra_przegladarkowa.DAL;
+using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
+using Owl.reCAPTCHA;
 
 namespace Gra_przegladarkowa
 {
@@ -42,6 +45,13 @@ namespace Gra_przegladarkowa
 
 
             services.AddControllersWithViews();
+
+            services.AddreCAPTCHAV3(x =>
+            {
+                x.SiteKey = "6LeN6dAZAAAAALFmIenwRDhwTVqXEkaOM-uEPVnP";
+                x.SiteSecret = "6LeN6dAZAAAAAIBpO_721qaEHvBUwwkaRTQyiqNw";
+            });
+
             services.AddRazorPages();
         }
 

@@ -18,24 +18,34 @@
         <div class="col-lg-6 mx-auto">
             <div class="card text-white bg-login">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-6">
-                            <a class="text-center active nav-link" asp-area="Identity" asp-page="/Account/Login">Logowanie</a>
-                        </div>
-                        <div class="col-6">
-                            <a class="text-center unactive nav-link" asp-area="Identity" asp-page="/Account/Register">Rejestracja</a>
+                    <div class="">
+                        <div class="w-100">
+                            <a class="text-center active nav-link" asp-area="Identity" asp-page="/Account/Login">Masz już konto? Zaloguj się!</a>
                         </div>
                     </div>
                     <hr>
                 </div>
+
+
+
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-xl-12">
 
+                            <!--     Captcha       -->
+                            @addTagHelper *, Owl.reCAPTCHA
+                            <!--     Captcha       -->
+
                             <form asp-route-returnurl="@Model.ReturnUrl" method="post">
                                 <div asp-validation-summary="All" class="text-danger"></div>
 
+                                <div class="text-danger"> @ViewData["EmailMsg"]</div>
+
                                 <div class="form-group">
+
+                                    <!--     Captcha       -->
+                                    <input type="hidden" asp-for="Input.token" id="token">
+                                    <!--     Captcha       -->
 
                                     <center>
                                         <label asp-for="Input.Email"></label>
@@ -65,23 +75,32 @@
 
 
 
+
+
                                 <div class="form-group">
                                     <center>
                                         <button type="submit" tabindex="4" class="myButton2">Zarejestruj</button>
                                     </center>
                                 </div>
 
+                                <hr>
+
                                 <div class="form-group">
                                     <div class="row align-items-center">
                                         <div class="col-xl-12">
                                             <div class="text-center">
-                                                <a class="forgot-password" asp-controller="About" asp-action="Rules">Rejestrując się automatycznie akceptujesz regulamin!</a>
+                                                <a class="rules" asp-controller="About" asp-action="Rules">Rejestrując się automatycznie akceptujesz regulamin!</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                             </form>
+
+                            <!--     Captcha       -->
+                            <recaptcha-script-v3 />
+                            <!--     Captcha       -->
+
 
                             <hr>
 
@@ -123,8 +142,17 @@
 
 
 
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <link rel="stylesheet" href="~/css/account/loginregister.css" />
+    
+    <!--     Captcha       -->
+    <script>
+        function callback(token) {
+            document.getElementById("token").value = token;
+        }
+    </script>
+    <recaptcha-script-v3-js action="login" callback="callback" />
+    <!--     Captcha       -->
+
 }

@@ -15,27 +15,33 @@ using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Gra_przegladarkowa.Services;
 using System.IO;
+using Owl.reCAPTCHA.v3;
+using Owl.reCAPTCHA;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
-        private readonly IEmailSender _emailSender;
+        private readonly IreCAPTCHASiteVerifyV3 _siteVerify; //captcha
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IreCAPTCHASiteVerifyV3 siteVerify //captcha
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
-            _emailSender = emailSender;
+            _siteVerify = siteVerify;
         }
 
         [BindProperty]
@@ -63,10 +69,22 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             [Display(Name = "Potwierdź hasło")]
             [Compare("Password", ErrorMessage = "Hasła są różne.")]
             public string ConfirmPassword { get; set; }
+
+            /*      Captcha     */
+            public string token { get; set; }
+            /*      Captcha     */
+
+ 
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+
+            if(TempData["CheckEmail"] != null)
+            {
+                ViewData["EmailMsg"] = TempData["CheckEmail"].ToString();
+            }
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -75,6 +93,25 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
         {
             returnUrl = returnUrl ?? Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+
+            /*      Captcha     */
+            var response = await _siteVerify.Verify(new reCAPTCHASiteVerifyRequest
+            {
+                Response = Input.token,
+                RemoteIp = HttpContext.Connection.RemoteIpAddress.ToString()
+            });
+
+            if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
+            {
+                _logger.LogInformation("\n "+ "\n " + "token " + response.Success + "  score: " + response.Score + "\n "+ "\n ");
+                ModelState.AddModelError("token", "Nie powiodła się weryfikacja");
+                return Page();
+            }
+            _logger.LogInformation("Success: " + response.Success + "\t       Score: " + response.Score );
+            /*      Captcha     */
+
+
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
@@ -94,17 +131,6 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                     SendMail email = new SendMail();
 
 
-                    /*
-                    //var path1 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/EmailConfirmTemplate1.txt");
-                    StreamReader str = new StreamReader("Areas\\Identity\\Pages\\Account\\EmailConfirmTemplate1.txt");
-                    string part1 = str.ReadToEnd();
-                    str.Close();
-
-                    //var path2 = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "/EmailConfirmTemplate2.txt");
-                    StreamReader str2 = new StreamReader("Areas\\Identity\\Pages\\Account\\EmailConfirmTemplate2.txt");
-                    string part2 = str2.ReadToEnd();
-                    str2.Close();
-                    */
 
                     string msg = $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Kliknij na link, aby aktywować konto!</a>.";
 
