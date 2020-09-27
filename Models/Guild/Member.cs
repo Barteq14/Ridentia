@@ -12,19 +12,19 @@ namespace Gra_przegladarkowa.Models.Guild
         [Key]
         [Required]
         public int MemberID { get; set; }
-        public int GuildID { get; set; }
-        [ForeignKey("GuildID")]
+        public int? GuildID { get; set; }
+        [ForeignKey("GuildID"), Column(Order = 0)]
         public virtual Guild Guild { get; set; }
-        public int GuildChatID { get; set; }
-        [ForeignKey("GuildChatID")]
+        public int? GuildChatID { get; set; }
+        [ForeignKey("GuildChatID"), Column(Order = 1)]
         public virtual GuildChat GuildChat { get; set; }
         //Guild chat  - members  1 czat ma wielu członkow chyba
-        public int RoleID { get; set; }
-        [ForeignKey("RoleID")]
+        public int? RoleID { get; set; }
+        [ForeignKey("RoleID"), Column(Order = 2)]
         public virtual Role Role { get; set; }
-        public int CharacterID { get; set; }
-        [ForeignKey("CharacterID")]
+        public int? CharacterID { get; set; }
+        [ForeignKey("CharacterID"), Column(Order = 3)]
         public virtual Character.Character Character { get; set; }
-        public virtual ICollection<GuildChat> GuildChats { get; set; }
+        //public virtual ICollection<GuildChat> GuildChats { get; set; }
     }
 }

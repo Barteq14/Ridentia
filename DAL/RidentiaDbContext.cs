@@ -3,6 +3,7 @@ using Gra_przegladarkowa.Models.Character;
 using Gra_przegladarkowa.Models.Guild;
 using Gra_przegladarkowa.Models.Item;
 using Gra_przegladarkowa.Models.Mission;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace Gra_przegladarkowa.DAL
         public DbSet<Profile> Profiles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        { 
             modelBuilder.Entity<Character>().ToTable("Characters");
             modelBuilder.Entity<Friend>().ToTable("Friends");
             modelBuilder.Entity<Level>().ToTable("Levels");
@@ -68,6 +69,31 @@ namespace Gra_przegladarkowa.DAL
             modelBuilder.Entity<Missions>().ToTable("Missions");
             modelBuilder.Entity<Monster>().ToTable("Monsters");
             modelBuilder.Entity<Profile>().ToTable("Profiles");
+            /*
+             modelBuilder.Entity<RaportGuild>().HasRequired(m => m.BirthCity)
+                .WithMany(m => m.BirthCityStudents).HasForeignKey(m => m.BirthCityId);
+             modelBuilder.Entity<RaportGuild>().HasRequired(m => m.LivingCity)
+                       .WithMany(m => m.LivingCityStudents).HasForeignKey(m => m.LivingCityId);
+
+              modelBuilder.Entity<Match>()
+                     .HasRequired(m => m.HomeTeam)
+                     .WithMany(t => t.HomeMatches)
+                     .HasForeignKey(m => m.HomeTeamId)
+                     .WillCascadeOnDelete(false);
+            */
+            /*
+            //tutaj jest problem , nie wiem dokładnie jak to zrobic 
+            modelBuilder.Entity<RaportGuild>()
+                 .HasOne<Guild>(s => s.Guild)
+                 .WithMany(g => g.RaportGuilds1)
+                 .HasForeignKey(s => s.GuildID);
+          
+
+            modelBuilder.Entity<RaportGuild>()
+                 .HasOne<Guild>(s => s.Guild2)
+                 .WithMany(g => g.RaportGuilds2)
+                 .HasForeignKey(s => s.GuildID2);   
+           */
         }
     }
 }

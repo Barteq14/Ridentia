@@ -16,14 +16,6 @@ namespace Gra_przegladarkowa.Models.Guild
         [DataType(DataType.DateTime)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yy H:mm:ss zzz}")]
         public DateTime DateRaportGuild { get; set; }
-        /*
-        [Required]
-        [Range(0,99999999)]
-        public int FightWin { get; set; }
-        [Required]
-        [Range(0, 99999999)]
-        public int FightLose { get; set; }
-        */
         [Required]
         [Range(0, 99999999)]
         public int GoldStolen { get; set; }
@@ -31,11 +23,13 @@ namespace Gra_przegladarkowa.Models.Guild
         [Range(0, 99999999)]
         public int Fame { get; set; }
         //tutaj nie wiem (fight lose , fight win)
-        public int FightWin { get; set; }
-        [ForeignKey("FightWin")]
+        
+       // [InverseProperty("RaportGuilds")]
+        public int? GuildID { get; set; }
+        [ForeignKey("GuildID"),  Column(Order = 0)]
+        public int? GuildID2 { get; set; }
+        [ForeignKey("GuildID2"), Column(Order = 1)]
         public virtual Guild Guild { get; set; }
-        public int FightLose { get; set; }
-        [ForeignKey("FightLose")]
         public virtual Guild Guild2 { get; set; }
     }
 }

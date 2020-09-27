@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -28,11 +29,15 @@ namespace Gra_przegladarkowa.Models.Guild
         [Required]
         [Range(0, 999999999)]
         public int FamePointGuild { get; set; }
-        public virtual ICollection<Guild_Building> Guild_Buildings { get; set; }
-        public virtual ICollection<Role> Roles { get; set; }
-        public virtual ICollection<Member> Members { get; set; }
-        public virtual ICollection<RaportGuild> RaportGuilds { get; set; }
-        public virtual ICollection<InvitationsGuild> InvitationsGuilds { get; set; }
-
+        //public virtual ICollection<Guild_Building> Guild_Buildings { get; set; }
+        //public virtual ICollection<Role> Roles { get; set; }
+        //public virtual ICollection<Member> Members { get; set; }
+        //public virtual List<RaportGuild> RaportGuilds { get; set; }
+        //public virtual ICollection<InvitationsGuild> InvitationsGuilds { get; set; }
+       /* [InverseProperty("Guild")]
+        public virtual ICollection<RaportGuild> RaportGuilds1 { get; set; }
+        [InverseProperty("Guild2")]
+        public virtual ICollection<RaportGuild> RaportGuilds2 { get; set; }
+       */
     }
 }
