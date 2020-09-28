@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Gra_przegladarkowa.Models.Character.Profession>
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -7,6 +8,9 @@
     <partial name="_ValidationScriptsPartial" />
     <link rel="stylesheet" href="~/css/CreateCharacter/index.css" />
 }
+
+
+
 
 
 <div class="container text-center page">
@@ -22,6 +26,28 @@
 
         <!-- generowane będzie potem z automatu w pętli-->
         <div class="row justify-content-center chooseCharacter">
+
+            <!-- generowanie card postaci -->
+            @foreach (var profession in Model)
+            {
+                <div class="col-lg-4 col-sm-6 justify-content-center">
+                    <div class="card">
+                        <div class="circle">
+                            <img src="@profession.ImageProfessionName" class="img-fluid" />
+                        </div>
+                        <div class="content">
+                            <h1>@profession.NameProfession</h1>
+                            <p>
+                                Wojownicy opierają swoją siłę na walce wręcz. Zadają duże obrażenia oraz posiadają większą
+                                ilość pancerza co zwiększa ich wytrzymałość. Ich głównymi atrybutami jest siła, pancerz oraz
+                                obrażenia.
+                            </p>
+                            <button><a href="#">Wybierz</a></button>
+                        </div>
+                    </div>
+                </div>
+            }
+
             <!-- Wojownik start-->
             <div class="col-lg-4 col-sm-6 justify-content-center">
                 <div class="card">
@@ -69,8 +95,8 @@
                         <p>
                             Zabójcy to cień każdego przeciwnika. Potrafią oni umiejętnie unikać ciosów, co często daje
                             im przewagę w walce, ich główną wadą jest wytrzymałość. Cechy na których opierają swoją siłe to
-                            zręczność, siła oraz szybkość ataku. 
-                            
+                            zręczność, siła oraz szybkość ataku.
+
                         </p>
                         <button><a href="#">Wybierz</a></button>
                     </div>
