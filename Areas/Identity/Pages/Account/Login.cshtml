@@ -36,7 +36,7 @@
                             <form id="account" method="post" style="display: block;">
                                 <div asp-validation-summary="All" class="text-danger"></div>
 
-                                <div class="text-danger"> @ViewData["EmailMsg"]</div>
+                                <div class="text-danger"> @ViewData["RegisteredMsg"]</div>
 
                                 <!--     Captcha       -->
                                 <input type="hidden" asp-for="Input.token" id="token">
