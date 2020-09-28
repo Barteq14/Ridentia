@@ -14,6 +14,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Gra_przegladarkowa.DAL;
 using Microsoft.AspNetCore.Http;
+using GoogleReCaptcha.V3;
+using GoogleReCaptcha.V3.Interface;
+using Owl.reCAPTCHA;
 
 namespace Gra_przegladarkowa
 {
@@ -44,6 +47,14 @@ namespace Gra_przegladarkowa
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews();
+
+            //recaptcha klucze
+            services.AddreCAPTCHAV3(x =>
+            {
+                x.SiteKey = "6LeN6dAZAAAAALFmIenwRDhwTVqXEkaOM-uEPVnP";
+                x.SiteSecret = "6LeN6dAZAAAAAIBpO_721qaEHvBUwwkaRTQyiqNw";
+            });
+
             services.AddRazorPages();
         }
 

@@ -9,120 +9,143 @@
     <center>
         <h1 class="non-select">Ridentia - Logowanie<br> </h1>
     </center>
-</header><br/><hr>
+</header>
+<br />
+<hr>
 
-    <div class="container ">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mx-auto">
-                <div class="card text-white bg-login">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-6">
-                                <a class="text-center unactive nav-link" asp-area="Identity" asp-page="/Account/Login">Logowanie</a>
-                            </div>
-                            <div class="col-6">
-                                <a class="text-center active nav-link" asp-area="Identity" asp-page="/Account/Register">Rejestracja</a>
-                            </div>
+<div class="container ">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mx-auto">
+            <div class="card text-white bg-login">
+                
+                <div class="card-header">
+                    <div class="">
+                        <div class="w-100">
+                            <a class="text-center active nav-link" asp-area="Identity" asp-page="/Account/Register">Nie masz konta? Zarejestruj się!</a>
                         </div>
-                        <hr>
                     </div>
-                    <div class="card-body">
-                        <div class="row align-items-center">
-                            <div class="col-xl-12">
+                    <hr>
+                </div>
+                    <div class="row align-items-center">
+                        <div class="col-xl-12">
 
-                                <form id="account" method="post" style="display: block;">
-                                    <div asp-validation-summary="All" class="text-danger"></div>
+                            <!--     Captcha       -->
+                            @addTagHelper *, Owl.reCAPTCHA
+                            <!--     Captcha       -->
 
-                                    <div class="form-group">
+                            <form id="account" method="post" style="display: block;">
+                                <div asp-validation-summary="All" class="text-danger"></div>
+
+                                <div class="text-danger"> @ViewData["RegisteredMsg"]</div>
+
+                                <!--     Captcha       -->
+                                <input type="hidden" asp-for="Input.token" id="token">
+                                <!--     Captcha       -->
+
+                                <div class="form-group">
+                                    <br />
+                                    <input type="hidden" name="captcha" id="captchaInput" /> <!-- Captcha -->
+
+                                    <center>
+                                        <label class="non-select" asp-for="Input.Email"></label>
+                                        <input asp-for="Input.Email" class="form-control" placeholder="Email" value="" tabindex="1"> <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </center>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <center>
+                                        <label class="non-select" asp-for="Input.Password"></label>
+                                        <input asp-for="Input.Password" class="form-control" placeholder="Has&#x142;o"
+                                               value="" tabindex="2"> <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                                    </center>
+
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <div class="form-check">
 
                                         <center>
-                                            <label class="non-select" asp-for="Input.Email"></label>
-                                            <input asp-for="Input.Email" class="form-control" placeholder="Email" value="" tabindex="1"> <span asp-validation-for="Input.Email" class="text-danger"></span>
-                                        </center>
-                                    </div>
-
-                                    <div class="form-group">
-
-                                        <center>
-                                            <label class="non-select" asp-for="Input.Password"></label>
-                                            <input asp-for="Input.Password" class="form-control" placeholder="Has&#x142;o"
-                                                   value="" tabindex="2"> <span asp-validation-for="Input.Password" class="text-danger"></span>
-
+                                            <label class="non-select" asp-for="Input.RememberMe"></label>
+                                            <input asp-for="Input.RememberMe" tabindex="3">
                                         </center>
 
                                     </div>
+                                </div>
 
-                                    <div class="form-group text-center">
-                                        <div class="form-check">
-
-                                            <center>
-                                                <label class="non-select" asp-for="Input.RememberMe"></label>
-                                                <input asp-for="Input.RememberMe" tabindex="3">
-                                            </center>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <center>
-                                            <button type="submit" tabindex="4" class="myButton1">Zaloguj</button>
-                                        </center>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-12">
-                                                <div class="text-center">
-                                                    <a class="forgot-password" asp-page="./ForgotPassword">Zapomnia&#x142;e&#x15B; has&#x142;o?</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
+                                <div class="form-group">
+                                    <center>
+                                        <button type="submit" tabindex="4" class="myButton1">Zaloguj</button>
+                                    </center>
+                                </div>
 
                                 <hr>
 
+                                <div class="form-group">
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-12">
+                                            <div class="text-center">
+                                                <a class="rules" asp-page="./ForgotPassword">Przypomnij hasło</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+
+                            <!--     Captcha       -->
+                            <recaptcha-script-v3 />
+                            <!--     Captcha       -->
+
+                            <hr>
 
 
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-
-            <footer>
-                <center>
-                    <p class="non-select">
-                        „Ridentia” jest Polską grą przeglądarkową wykonywaną przez studio Arbato. <br />
-                        Świat ten łączy historię, legendę i fantazję, tworząc żywe środowisko gry RPG.<br />
-                        Fabuła gry jest osadzona w świecie fantazyjnym, którą zamieszkują mężni wojownicy, odważni barbarzyńcy, celni łucznicy, bezszelestni zabójcy, leczący druidzi, magiczni magowie.
-                        Każdy z nich posiada inną paletę ekwipunku i ataków specjalnych.<br /><br>
-
-
-
-                                                                            <ul>
-                                                                                <li class="non-select text-light">Staw czoła potężnym potworom, a także innym przeciwnikom na arenie.</li>
-                                                                                <li class="non-select text-light">Wykonuj różne, niebezpieczne misje, które będą dostarczać nagrody.</li>
-                                                                                <li class="non-select text-light">Zdobywaj złoto i ekwipunek niezbędny do walk.</li>
-                                                                                <li class="non-select text-light">Zbierz drużynę, która będzie walczyć u Twojego boku.</li>
-                                                                            </ul>
-
-                        <br />
-
-                    </p>
-                </center>
-            </footer>
-
         </div>
+
+        <footer>
+            <center>
+                <p class="non-select">
+                    „Ridentia” jest Polską grą przeglądarkową wykonywaną przez studio Arbato. <br />
+                    Świat ten łączy historię, legendę i fantazję, tworząc żywe środowisko gry RPG.<br />
+                    Fabuła gry jest osadzona w świecie fantazyjnym, którą zamieszkują mężni wojownicy, odważni barbarzyńcy, celni łucznicy, bezszelestni zabójcy, leczący druidzi, magiczni magowie.
+                    Każdy z nich posiada inną paletę ekwipunku i ataków specjalnych.<br /><br>
+
+
+
+                    <ul>
+                        <li class="non-select text-light">Staw czoła potężnym potworom, a także innym przeciwnikom na arenie.</li>
+                        <li class="non-select text-light">Wykonuj różne, niebezpieczne misje, które będą dostarczać nagrody.</li>
+                        <li class="non-select text-light">Zdobywaj złoto i ekwipunek niezbędny do walk.</li>
+                        <li class="non-select text-light">Zbierz drużynę, która będzie walczyć u Twojego boku.</li>
+                    </ul>
+
+                    <br />
+
+                </p>
+            </center>
+        </footer>
+
     </div>
+</div>
 
 
 
 
-
-
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-        <link rel="stylesheet" href="~/css/account/loginregister.css" />
-    }
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/account/loginregister.css" />
+    <!--     Captcha       -->
+    <script>
+        function callback(token) {
+            document.getElementById("token").value = token;
+        }
+    </script>
+    <recaptcha-script-v3-js action="login" callback="callback" />
+    <!--     Captcha       -->
+}
