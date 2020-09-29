@@ -111,7 +111,9 @@ namespace Gra_przegladarkowa.Migrations
                     ProfessionID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NameProfession = table.Column<string>(maxLength: 150, nullable: false),
+                    Description = table.Column<string>(maxLength: 999999999, nullable: true),
                     ImageProfessionName = table.Column<string>(nullable: false),
+                    ImageProfessionName2 = table.Column<string>(nullable: false),
                     Strenght = table.Column<int>(nullable: false),
                     Dexterity = table.Column<int>(nullable: false),
                     Armor = table.Column<int>(nullable: false),
