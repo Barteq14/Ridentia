@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Gra_przegladarkowa.Services;
+using Owl.reCAPTCHA;
+using Owl.reCAPTCHA.v3;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
@@ -19,11 +21,13 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IreCAPTCHASiteVerifyV3 _siteVerify; //captcha
 
-        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<IdentityUser> userManager, IEmailSender emailSender, IreCAPTCHASiteVerifyV3 siteVerify)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _siteVerify = siteVerify; //captcha
         }
 
         [BindProperty]
@@ -34,8 +38,12 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             [Required]
             [EmailAddress]
             public string Email { get; set; }
+
+            /*      Captcha     */
+            public string token { get; set; }
+            /*      Captcha     */
         }
-                    
+
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -50,6 +58,21 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync()
         {
+            /*      Captcha     */
+            var response = await _siteVerify.Verify(new reCAPTCHASiteVerifyRequest
+            {
+                Response = Input.token,
+                RemoteIp = HttpContext.Connection.RemoteIpAddress.ToString()
+            });
+
+            if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
+            {
+                TempData["CheckConfirm"] = "Nie powiodła się weryfikacja captchy.";
+                return RedirectToPage("./ForgotPassword");
+            }
+            /*      Captcha     */
+
+
             if (ModelState.IsValid)
             {
                 var user = await _userManager.FindByEmailAsync(Input.Email);
@@ -69,26 +92,19 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                /*
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Aby zresetować hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.");
-                */
-
+     
                 SendMail email = new SendMail();
 
 
 
                 string msg = $"Aby zresetować hasło <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.";
-
                 email.SendEmail(Input.Email, "Hasło - Ridentia", msg);
 
                 TempData["CheckConfirm"] = "Na email został wysłany link resetujący hasło.";
-
                 return RedirectToPage("./Login");
             }
 
+            TempData["CheckConfirm"] = "Wystąpił błąd.";
             return Page();
         }
     }

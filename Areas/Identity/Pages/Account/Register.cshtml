@@ -5,15 +5,30 @@
     ViewData["Title"] = "Rejestracja";
 }
 
-<header>
-    <center>
-        <h1 class="non-select">Ridentia - Rejestracja<br> </h1>
-    </center>
-</header>
-<br />
+<h1 class="non-select text-center">Ridentia - Rejestracja<br> </h1>
+
 <hr>
 
 <div class="row justify-content-center ">
+
+    <center>
+        <p class="non-select">
+            <ul class="nav justify-content-center">
+                <li class="nav-item non-select">
+                    „Ridentia” jest Polską grą przeglądarkową wykonywaną przez studio Artoba.<br>
+                </li>
+                <li class="nav-item non-select">
+                    Świat ten łączy historię, legendę i fantazję, tworząc żywe środowisko gry RPG.<br>
+                </li>
+                <li class="nav-item non-select">
+                    Fabuła gry jest osadzona w świecie fantazyjnym, którą zamieszkują mężni wojownicy, odważni barbarzyńcy, celni łucznicy, bezszelestni zabójcy, leczący druidzi, magiczni magowie.
+                    Każdy z nich posiada inną paletę ekwipunku i ataków specjalnych.<br>
+                </li>
+            </ul>
+        </p>
+    </center>
+
+
     <div class="row align-items-center">
         <div class="col-lg-6 mx-auto">
             <div class="card text-white bg-login">
@@ -32,13 +47,9 @@
                             <form asp-route-returnurl="@Model.ReturnUrl" method="post">
 
 
-                                <hr>
 
-                               <div class="form-group">
-                                    <div class="text-danger"> @ViewData["EmailMsg"]</div>
-                               </div>
+                                <div class="text-dangers"> @ViewData["EmailMsg"]</div>
 
-                                <hr>
 
                                 <div class="form-group">
 
@@ -54,7 +65,7 @@
                                             <input asp-for="Input.Email" class="form-control" placeholder="E-mail" value="" tabindex="1">
                                         </div>
 
-                                        <span asp-validation-for="Input.Email" class=" text-danger"></span>
+                                        <span asp-validation-for="Input.Email" class=" text-dangers"></span>
                                     </center>
 
                                 </div>
@@ -69,7 +80,7 @@
                                             <input asp-for="Input.Password" class="form-control" placeholder="Hasło" value="" tabindex="2">
                                         </div>
 
-                                        <span asp-validation-for="Input.Password" class=" text-danger"></span>
+                                        <span asp-validation-for="Input.Password" class=" text-dangers"></span>
                                     </center>
 
                                 </div>
@@ -86,7 +97,7 @@
                                             <input asp-for="Input.ConfirmPassword" class="form-control" placeholder="Hasło" value="" tabindex="3">
                                         </div>
 
-                                        <span asp-validation-for="Input.ConfirmPassword" class=" text-danger"></span>
+                                        <span asp-validation-for="Input.ConfirmPassword" class=" text-dangers"></span>
                                     </center>
 
                                 </div>
@@ -119,21 +130,8 @@
                                     </center>
                                 </div>
 
-
                                 <hr>
-
-
-
                             </form>
-
-                            <!--     Captcha       -->
-                            <recaptcha-script-v3 />
-                            <!--     Captcha       -->
-
-
-                            <hr>
-
-
 
                         </div>
                     </div>
@@ -141,27 +139,30 @@
             </div>
         </div>
 
-            <center><hr>
-                <p class="non-select">
-                    „Ridentia” jest Polską grą przeglądarkową wykonywaną przez studio Artoba. <br />
-                    Świat ten łączy historię, legendę i fantazję, tworząc żywe środowisko gry RPG.<br />
-                    Fabuła gry jest osadzona w świecie fantazyjnym, którą zamieszkują mężni wojownicy, odważni barbarzyńcy, celni łucznicy, bezszelestni zabójcy, leczący druidzi, magiczni magowie.
-                    Każdy z nich posiada inną paletę ekwipunku i ataków specjalnych.<br />
+        <center>
+            <p class="non-select">
+                <ul class="nav justify-content-center">
+                    <li class="non-select">
+                        <i class="fa fa-angle-double-right"></i><span class="ml-2">Staw czoła potężnym potworom, a także innym przeciwnikom na arenie.a<br></span>
+                    </li>
+                    <li class="non-select">
+                        <i class="fa fa-angle-double-right"></i><span class="ml-2">Wykonuj różne, niebezpieczne misje, które będą dostarczać nagrody.<br></span>
+                    </li>
+                    <li class="non-select">
+                        <i class="fa fa-angle-double-right"></i><span class="ml-2">Zdobywaj złoto i ekwipunek niezbędny do walk.<br></span>
+                    </li>
+                    <li class="non-select">
+                        <i class="fa fa-angle-double-right"></i><span class="ml-2">Zbierz drużynę, która będzie walczyć u Twojego boku.</span><br>
+                    </li>
+                </ul>
+            </p>
+        </center>
 
-                </p>
-                    <hr>
 
-                    <p class="non-select">
-                        Staw czoła potężnym potworom, a także innym przeciwnikom na arenie.<br>
-                        Wykonuj różne, niebezpieczne misje, które będą dostarczać nagrody.<br>
-                        Zdobywaj złoto i ekwipunek niezbędny do walk.<br>
-                        Zbierz drużynę, która będzie walczyć u Twojego boku.<br>
-                   
+        <!--     Captcha       -->
+        <recaptcha-script-v3 />
+        <!--     Captcha       -->
 
-                    <br />
-
-                </p>
-            </center>
 
     </div>
 </div>
@@ -172,9 +173,8 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
     <link rel="stylesheet" href="~/css/account/loginregister.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
     <!--     Captcha       -->
     <script>

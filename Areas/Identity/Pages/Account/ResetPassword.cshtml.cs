@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Owl.reCAPTCHA;
+using Owl.reCAPTCHA.v3;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
@@ -16,10 +18,12 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
     public class ResetPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly IreCAPTCHASiteVerifyV3 _siteVerify; //captcha
 
-        public ResetPasswordModel(UserManager<IdentityUser> userManager)
+        public ResetPasswordModel(UserManager<IdentityUser> userManager, IreCAPTCHASiteVerifyV3 siteVerify) 
         {
             _userManager = userManager;
+            _siteVerify = siteVerify; //captcha
         }
 
         [BindProperty]
@@ -45,6 +49,10 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
+
+            /*      Captcha     */
+            public string token { get; set; }
+            /*      Captcha     */
         }
 
         public IActionResult OnGetAsync(string code = null)
@@ -74,31 +82,45 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
         {
             if (!ModelState.IsValid)
             {
-                return Page();
+                TempData["CheckExist"] = "Nie udało się zresetować konta.";
+                return RedirectToPage("./ForgotPassword");
             }
+
+            /*      Captcha     */
+            var response = await _siteVerify.Verify(new reCAPTCHASiteVerifyRequest
+            {
+                Response = Input.token,
+                RemoteIp = HttpContext.Connection.RemoteIpAddress.ToString()
+            });
+
+            if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
+            {
+                TempData["CheckConfirm"] = "Błąd captcha.";
+                return RedirectToPage("./ForgotPassword");
+            }
+            /*      Captcha     */
+
 
             var user = await _userManager.FindByEmailAsync(Input.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                TempData["CheckExist"] = "Wystąpił błąd, zresetuj hasło jeszcze raz.";
+                TempData["CheckExist"] = "Zły email.";
                 return RedirectToPage("./ForgotPassword");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                TempData["CheckConfirm"] = "Udało się zresetować haslo.";
+                TempData["CheckConfirm"] = "Udało się zresetować hasło.";
 
                 return RedirectToPage("./Login");
             }
 
-            foreach (var error in result.Errors)
-            {
-                TempData["CheckExist"] = "Token nie pasuje do użytkownika.";
+          
+                TempData["CheckExist"] = "Nie udało się zresetować konta.";
                 return RedirectToPage("./ForgotPassword");
-            }
-            return Page();
+          
         }
     }
 }

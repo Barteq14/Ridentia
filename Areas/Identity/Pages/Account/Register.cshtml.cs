@@ -105,7 +105,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
             {
                 _logger.LogInformation("\n "+ "\n " + "token " + response.Success + "  score: " + response.Score + "\n "+ "\n ");
-                ModelState.AddModelError("token", "Nie powiodła się weryfikacja");
+                TempData["CheckEmail"] = "Nie powiodła się weryfikacja. " +response.Score;
                 return Page();
             }
             _logger.LogInformation("Success: " + response.Success + "\t       Score: " + response.Score );
@@ -138,7 +138,6 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                     TempData["CheckEmail"] = "Aby aktywować konto musisz wejść na email i wejść w link aktywacyjny! ";
 
-
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
                         
@@ -150,14 +149,16 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                         return LocalRedirect(returnUrl);
                     }
                 }
-                foreach (var error in result.Errors)
-                {
-                    ModelState.AddModelError(string.Empty, error.Description);
-                }
+
+                
+
+                
+
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
+            TempData["CheckEmail"] = "Nie udało się zarejestrować";
+            return RedirectToPage("./Register");
         }
     }
 }
