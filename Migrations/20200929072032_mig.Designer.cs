@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gra_przegladarkowa.Migrations
 {
     [DbContext(typeof(RidentiaDbContext))]
-    [Migration("20200925062727_mig")]
+    [Migration("20200929072032_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,6 +183,10 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int>("BlockHit")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(999999999);
+
                     b.Property<int>("Dexterity")
                         .HasColumnType("int");
 
@@ -190,6 +194,10 @@ namespace Gra_przegladarkowa.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageProfessionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageProfessionName2")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

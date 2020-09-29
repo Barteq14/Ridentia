@@ -15,9 +15,15 @@ namespace Gra_przegladarkowa.Models.Character
         [DataType(DataType.Text)]
         [MaxLength(150)]
         public string NameProfession { get; set; }
+        [DataType(DataType.MultilineText)]
+        [MaxLength(999999999)]
+        public string Description { get; set; }
         [Required]
         [DataType(DataType.ImageUrl)]
         public string ImageProfessionName { get; set; }
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        public string ImageProfessionName2 { get; set; }
         [Required]
         [Range(0, 1000)]
         public int Strenght { get; set; }

@@ -54,6 +54,8 @@
     <Compile Remove="Migrations\20200924175336_mig.Designer.cs" />
     <Compile Remove="Migrations\20200924180055_mig.cs" />
     <Compile Remove="Migrations\20200924180055_mig.Designer.cs" />
+    <Compile Remove="Migrations\20200925062727_mig.cs" />
+    <Compile Remove="Migrations\20200925062727_mig.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -68,6 +70,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\css\CreateCharacter\" />
   </ItemGroup>
 

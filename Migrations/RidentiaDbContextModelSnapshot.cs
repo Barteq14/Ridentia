@@ -181,6 +181,10 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int>("BlockHit")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)")
+                        .HasMaxLength(999999999);
+
                     b.Property<int>("Dexterity")
                         .HasColumnType("int");
 
@@ -188,6 +192,10 @@ namespace Gra_przegladarkowa.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ImageProfessionName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageProfessionName2")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
