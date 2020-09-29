@@ -69,20 +69,14 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnGetAsync(string returnUrl = null)
         {
 
+            if (TempData["CheckConfirm"] != null)
+            {
+                ViewData["RegisteredMsg"] = TempData["CheckConfirm"].ToString();
+            }
 
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("index");
-            }
-
-                if (!string.IsNullOrEmpty(ErrorMessage))
-            {
-                ModelState.AddModelError(string.Empty, ErrorMessage);
-            }
-
-            if (TempData["CheckConfirm"] != null)
-            {
-                ViewData["RegisteredMsg"] = TempData["CheckConfirm"].ToString();
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
@@ -111,15 +105,16 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
             {
                 _logger.LogInformation("\n " + "\n " + "token " + response.Success + "  score: " + response.Score + "\n " + "\n ");
-                ModelState.AddModelError("token", "Nie powiodła się weryfikacja");
-                return Page();
+                TempData["CheckConfirm"] = "Nie powiodła się weryfikacja.";
+                return RedirectToPage("./Login");
             }
             _logger.LogInformation("Success: " + response.Success + "\t       Score: " + response.Score);
             /*      Captcha     */
 
+
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
+
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
@@ -127,30 +122,25 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                     _logger.LogInformation("Zalogowano.");
                     return LocalRedirect(returnUrl);
                 }
-                /*
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-                }
-                */
+
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("Użytkownik zablokowany.");
-                    ModelState.AddModelError(string.Empty, "Użytkownik zbanowany");
-                    return Page();
+                    TempData["CheckConfirm"] = "Użytkownik zbanowany.";
+                    return RedirectToPage("./Login");
                 }
                 if(result.IsNotAllowed){
-                    ModelState.AddModelError(string.Empty, "Konto nie potwierdzone");
-                    return Page();
+                    TempData["CheckConfirm"] = "Konto nie potwierdzone.";
+                    return RedirectToPage("./Login");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Nie udało się zalogować :(");
-                    return Page();
+                    TempData["CheckConfirm"] = "Nie udało się zalogować.";
+                    return RedirectToPage("./Login");
                 }
             }
 
             // If we got this far, something failed, redisplay form
+            TempData["CheckConfirm"] = "Nie udało się zalogować...";
             return Page();
         }
     }
