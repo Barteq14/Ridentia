@@ -35,6 +35,18 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             [EmailAddress]
             public string Email { get; set; }
         }
+                    
+
+        public async Task<IActionResult> OnGetAsync()
+        {
+
+            if (TempData["CheckExist"] != null)
+            {
+                ViewData["ResetMessage"] = TempData["CheckExist"].ToString();
+            }
+
+            return Page();
+        }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -43,8 +55,8 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                 var user = await _userManager.FindByEmailAsync(Input.Email);
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToPage("./ForgotPasswordConfirmation");
+                    TempData["CheckExist"] = "Użytkownik nie istnieje.";
+                    return RedirectToPage("./ForgotPassword");
                 }
 
                 // For more information on how to enable account confirmation and password reset please 
@@ -72,8 +84,9 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                 email.SendEmail(Input.Email, "Hasło - Ridentia", msg);
 
+                TempData["CheckConfirm"] = "Na email został wysłany link resetujący hasło.";
 
-                return RedirectToPage("./ForgotPasswordConfirmation");
+                return RedirectToPage("./Login");
             }
 
             return Page();
