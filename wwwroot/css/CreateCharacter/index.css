@@ -59,15 +59,12 @@ label, .characterNameText {
     color: #111;
     padding: .5rem;
 }
-.card .content button{
+.card .content button {
     position: relative;
     padding: 10px 20px;
     background-color: rgba(0,0,0, 0.7);
     margin-bottom: 1rem;
     border-radius: 4rem;
-}
-.card .content button a {
-    text-decoration: none;
     color: white;
 }
   /** card second character end **/

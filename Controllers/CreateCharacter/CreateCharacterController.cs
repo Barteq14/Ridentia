@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Gra_przegladarkowa.Controllers.NewFolder
 {
+
     public class CreateCharacterController : Controller
     {
         private readonly RidentiaDbContext _context;
@@ -18,6 +19,7 @@ namespace Gra_przegladarkowa.Controllers.NewFolder
             _context = context;
         }
 
+
         //Get: /CreateCharacter
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Profession>>> Index()
@@ -26,102 +28,122 @@ namespace Gra_przegladarkowa.Controllers.NewFolder
             return View("Index", profession);
         }
 
-      
-      /*
-        public class ProfessionsController : ControllerBase
+
+        //Post: /CreateCharacter/CreateCharacter
+        [HttpPost]
+        public async Task<ActionResult> CreateCharacter(string nameCharacterInput, string choosenCharacter)
         {
-            private readonly RidentiaDbContext _context;
 
-            public ProfessionsController(RidentiaDbContext context)
+            //jeśli nie wybrana nazwa albo postać
+            if (nameCharacterInput == null || nameCharacterInput.Equals("") || choosenCharacter.Equals(""))
             {
-                _context = context;
+                return RedirectToAction(nameof(Index));
+
             }
+            //pobieranie aktualnie zalogowanego usera
+            var actuallyUserName = User.Identity.Name;
+            
+            //brakuje await
+            var actuallyProfile = _context.Profiles.Where(p => p.UserName == actuallyUserName);
 
-            // GET: api/Professions
-            [HttpGet]
-            public async Task<ActionResult<IEnumerable<Profession>>> GetProfessions()
-            {
-                return await _context.Professions.ToListAsync();
-            }
+            return View();
+        }
 
-            // GET: api/Professions/5
-            [HttpGet("{id}")]
-            public async Task<ActionResult<Profession>> GetProfession(int id)
-            {
-                var profession = await _context.Professions.FindAsync(id);
+        /*
+          public class ProfessionsController : ControllerBase
+          {
+              private readonly RidentiaDbContext _context;
 
-                if (profession == null)
-                {
-                    return NotFound();
-                }
+              public ProfessionsController(RidentiaDbContext context)
+              {
+                  _context = context;
+              }
 
-                return profession;
-            }
+              // GET: api/Professions
+              [HttpGet]
+              public async Task<ActionResult<IEnumerable<Profession>>> GetProfessions()
+              {
+                  return await _context.Professions.ToListAsync();
+              }
 
-            // PUT: api/Professions/5
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for
-            // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-            [HttpPut("{id}")]
-            public async Task<IActionResult> PutProfession(int id, Profession profession)
-            {
-                if (id != profession.ProfessionID)
-                {
-                    return BadRequest();
-                }
+              // GET: api/Professions/5
+              [HttpGet("{id}")]
+              public async Task<ActionResult<Profession>> GetProfession(int id)
+              {
+                  var profession = await _context.Professions.FindAsync(id);
 
-                _context.Entry(profession).State = EntityState.Modified;
+                  if (profession == null)
+                  {
+                      return NotFound();
+                  }
 
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProfessionExists(id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                  return profession;
+              }
 
-                return NoContent();
-            }
+              // PUT: api/Professions/5
+              // To protect from overposting attacks, enable the specific properties you want to bind to, for
+              // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+              [HttpPut("{id}")]
+              public async Task<IActionResult> PutProfession(int id, Profession profession)
+              {
+                  if (id != profession.ProfessionID)
+                  {
+                      return BadRequest();
+                  }
 
-            // POST: api/Professions
-            // To protect from overposting attacks, enable the specific properties you want to bind to, for
-            // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-            [HttpPost]
-            public async Task<ActionResult<Profession>> PostProfession(Profession profession)
-            {
-                _context.Professions.Add(profession);
-                await _context.SaveChangesAsync();
+                  _context.Entry(profession).State = EntityState.Modified;
 
-                return CreatedAtAction("GetProfession", new { id = profession.ProfessionID }, profession);
-            }
+                  try
+                  {
+                      await _context.SaveChangesAsync();
+                  }
+                  catch (DbUpdateConcurrencyException)
+                  {
+                      if (!ProfessionExists(id))
+                      {
+                          return NotFound();
+                      }
+                      else
+                      {
+                          throw;
+                      }
+                  }
 
-            // DELETE: api/Professions/5
-            [HttpDelete("{id}")]
-            public async Task<ActionResult<Profession>> DeleteProfession(int id)
-            {
-                var profession = await _context.Professions.FindAsync(id);
-                if (profession == null)
-                {
-                    return NotFound();
-                }
+                  return NoContent();
+              }
 
-                _context.Professions.Remove(profession);
-                await _context.SaveChangesAsync();
+              // POST: api/Professions
+              // To protect from overposting attacks, enable the specific properties you want to bind to, for
+              // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+              [HttpPost]
+              public async Task<ActionResult<Profession>> PostProfession(Profession profession)
+              {
+                  _context.Professions.Add(profession);
+                  await _context.SaveChangesAsync();
 
-                return profession;
-            }
+                  return CreatedAtAction("GetProfession", new { id = profession.ProfessionID }, profession);
+              }
 
-            private bool ProfessionExists(int id)
-            {
-                return _context.Professions.Any(e => e.ProfessionID == id);
-            }
-        }*/
+              // DELETE: api/Professions/5
+              [HttpDelete("{id}")]
+              public async Task<ActionResult<Profession>> DeleteProfession(int id)
+              {
+                  var profession = await _context.Professions.FindAsync(id);
+                  if (profession == null)
+                  {
+                      return NotFound();
+                  }
+
+                  _context.Professions.Remove(profession);
+                  await _context.SaveChangesAsync();
+
+                  return profession;
+              }
+
+              private bool ProfessionExists(int id)
+              {
+                  return _context.Professions.Any(e => e.ProfessionID == id);
+              }
+          }*/
     }
 }
