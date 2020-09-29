@@ -181,12 +181,59 @@ namespace Gra_przegladarkowa.DAL
             // professions
             var professions = new Profession[]
             {
-                new Profession { NameProfession = "Wojownik", Description = "" ,Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 ,NameSpecialMove ="Jego tarcza płonie co zadaje dodatkowe obrażenia oraz podwyższa punkty życia" , ImageProfessionName ="/Images/CreateCharacter/Characters/warrior.png", ImageProfessionName2 = "/Images/CreateCharacter/Characters/warriorMin.png" ,  SpecialMoveTurnRequired = 20},
-                new Profession { NameProfession = "Barbarzyńca", Description = "" , Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10, NameSpecialMove ="Podwyższenie pancerza o 200 punktów przed każda walką" , ImageProfessionName ="/Images/CreateCharacter/Characters/barbarzynca.png",ImageProfessionName2 = "/Images/CreateCharacter/Characters/barbarzyncaMin.png" , SpecialMoveTurnRequired = 20 },
-                new Profession { NameProfession = "Zabójca", Description = "" , Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 , NameSpecialMove ="Co pewną ilość ataków wyrzuca sztylet w przeciwnika" , ImageProfessionName ="/Images/CreateCharacter/Characters/zabojca.png", ImageProfessionName2 = "/Images/CreateCharacter/Characters/zabojcaMin.png" ,SpecialMoveTurnRequired = 20  },
-                new Profession { NameProfession = "Adept", Description = "" , Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 , NameSpecialMove ="Posyła magiczną kulę która wybuch na przeciwniku co 5 atak" , ImageProfessionName ="/Images/CreateCharacter/Characters/adept.png",ImageProfessionName2 = "/Images/CreateCharacter/Characters/adeptMin.png" , SpecialMoveTurnRequired = 20  },
-                new Profession { NameProfession = "Druid",  Description = "" ,Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 20  ,NameSpecialMove ="Przywracanie pewnej ilości punktów zrowia co 3 atak" , ImageProfessionName ="/Images/CreateCharacter/Characters/druid.png", ImageProfessionName2 = "/Images/CreateCharacter/Characters/druidMin.png" ,SpecialMoveTurnRequired = 20  },
-                new Profession { NameProfession = "Łucznik", Description = "" , Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10  ,NameSpecialMove ="Atak 3 strzałami na raz" , ImageProfessionName ="/Images/CreateCharacter/Characters/lucznik.png",ImageProfessionName2 = "/Images/CreateCharacter/Characters/lucznikMin.png" , SpecialMoveTurnRequired = 20  }
+                new Profession { 
+                    NameProfession = "Wojownik", 
+                    Description = "Wojownicy opierają swoją siłę na walce wręcz. Zadają duże obrażenia oraz posiadają większą ilość pancerza co zwiększa ich wytrzymałość. Ich głównymi atrybutami jest siła, pancerz oraz obrażenia." ,
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 ,
+                    NameSpecialMove ="Jego tarcza płonie co zadaje dodatkowe obrażenia oraz podwyższa punkty życia" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/warrior.png", 
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/warriorMin.png" , 
+                    SpecialMoveTurnRequired = 20},
+
+                new Profession { 
+                    NameProfession = "Barbarzyńca", 
+                    Description = "Barbarzyńcy cechują się wielką wytrzymałością. Nie zadają ogromnych obrażeń lecz świetnie sprawdzają ssię w walce na pierwszej linii. Ich głównymi atrybutami jest wytrzymałość, Hp oraz pancerz." , 
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10, 
+                    NameSpecialMove ="Podwyższenie pancerza o 200 punktów przed każda walką" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/barbarzynca.png",
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/barbarzyncaMin.png" ,
+                    SpecialMoveTurnRequired = 20 },
+
+                new Profession { 
+                    NameProfession = "Zabójca", 
+                    Description = "Zabójcy to cień każdego przeciwnika. Potrafią oni umiejętnie unikać ciosów, co często daje im przewagę w walce, ich główną wadą jest wytrzymałość. Cechy na których opierają swoją siłe to zręczność, siła oraz szybkość ataku." , 
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 , 
+                    NameSpecialMove ="Co pewną ilość ataków wyrzuca sztylet w przeciwnika" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/zabojca.png", 
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/zabojcaMin.png" ,
+                    SpecialMoveTurnRequired = 20  },
+
+                new Profession { 
+                    NameProfession = "Adept", 
+                    Description = "Adepci bazują na wiedzy pradawnej. Ich wiedza jest ogromna i potrafią wykorzystać ją, aby skutecznie unieszkodliwiać swoich wrogów. Ich głównymi atrybutami jest inteligencja, wiedza oraz zadawane obrażenia." , 
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10 ,
+                    NameSpecialMove ="Posyła magiczną kulę która wybuch na przeciwniku co 5 atak" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/adept.png",
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/adeptMin.png" , 
+                    SpecialMoveTurnRequired = 20  },
+
+                new Profession { 
+                    NameProfession = "Druid",  
+                    Description = " Druidzi są bardzo inteligetni. Wykorzystują swoją wiedzę w celach obronnych tak aby żaden przeciwnik nie mógł ich skrzywdzić. Są zręczni i mądrzy. Ich głównymi atrybutami jest inteligencja i zręczność" ,
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 20  ,
+                    NameSpecialMove ="Przywracanie pewnej ilości punktów zrowia co 3 atak" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/druid.png", 
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/druidMin.png" ,
+                    SpecialMoveTurnRequired = 20  },
+
+                new Profession { 
+                    NameProfession = "Łucznik", 
+                    Description = "Łucznicy, podczas walki, starają się trzymać z dala od przeciwnika i dzięki swojej broni atakować ich z odległości. Jest to ważna postać podczas walk drużynowych. Ich głównymi atrybutami jest zręczność, siła oraz celność ataków." , 
+                    Hp = 1500, Armor = 500, Strenght = 10, Dexterity = 10, Vitality = 10, Resistance = 10, BlockHit = 10, Inteligance = 10  ,
+                    NameSpecialMove ="Atak 3 strzałami na raz" , 
+                    ImageProfessionName ="/Images/CreateCharacter/Characters/lucznik.png",
+                    ImageProfessionName2 = "/Images/CreateCharacter/Characters/lucznikMin.png" , 
+                    SpecialMoveTurnRequired = 20  }
             };
             foreach (Profession p in professions)
             {
