@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gra_przegladarkowa.Migrations
 {
     [DbContext(typeof(RidentiaDbContext))]
-    [Migration("20200929072032_mig")]
+    [Migration("20200929080953_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
