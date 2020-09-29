@@ -27,28 +27,32 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "E-mail jest wymagany")]
             [EmailAddress]
+            [Display(Name = "E-mail")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Hasło jest wymagane")]
+            [StringLength(100, ErrorMessage = "{0} musi mieć conajmniej {2} oraz {1} znaków.", MinimumLength = 6)]
             [DataType(DataType.Password)]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "Hasło jest wymagane")]
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Potwierdź hasło")]
+            [Compare("Password", ErrorMessage = "Hasła są różne.")]
             public string ConfirmPassword { get; set; }
 
             public string Code { get; set; }
         }
 
-        public IActionResult OnGet(string code = null)
+        public IActionResult OnGetAsync(string code = null)
         {
             if (code == null)
             {
-                return BadRequest("A code must be supplied for password reset.");
+                ViewData["ResetPasswordMessage"] = "Nie prawidłowy kod dostępu.";
+                return Page();
             }
             else
             {
@@ -56,6 +60,12 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                 {
                     Code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(code))
                 };
+
+                if (TempData["ResetPasswordMsg"] != null)
+                {
+                    ViewData["ResetPasswordMessage"] = TempData["ResetPasswordMsg"].ToString();
+                }
+
                 return Page();
             }
         }
@@ -71,18 +81,22 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToPage("./ResetPasswordConfirmation");
+                TempData["CheckExist"] = "Wystąpił błąd, zresetuj hasło jeszcze raz.";
+                return RedirectToPage("./ForgotPassword");
             }
 
             var result = await _userManager.ResetPasswordAsync(user, Input.Code, Input.Password);
             if (result.Succeeded)
             {
-                return RedirectToPage("./ResetPasswordConfirmation");
+                TempData["CheckConfirm"] = "Udało się zresetować haslo.";
+
+                return RedirectToPage("./Login");
             }
 
             foreach (var error in result.Errors)
             {
-                ModelState.AddModelError(string.Empty, error.Description);
+                TempData["CheckExist"] = "Token nie pasuje do użytkownika.";
+                return RedirectToPage("./ForgotPassword");
             }
             return Page();
         }

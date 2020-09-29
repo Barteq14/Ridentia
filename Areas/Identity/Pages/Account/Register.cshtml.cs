@@ -136,11 +136,12 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                     email.SendEmail(Input.Email, "Rejestracja - Ridentia", msg);
 
-
+                    TempData["CheckEmail"] = "Aby aktywować konto musisz wejść na email i wejść w link aktywacyjny! ";
 
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
+                        
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
