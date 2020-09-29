@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Gra_przegladarkowa.Models.Character.Profession>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/CreateCharacter/index.css" />
+}
+
+
+
+
+
+<div class="container text-center page">
+    <form>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="col-12 characterNameText"><h1>Witaj przybyszu!</h1></div>
+                <label for="nameCharacterInput">Wpisz swoją nazwę:</label>
+                <input type="text" class="form-control" placeholder="Wpisz swoją nazwe..." id="nameCharacterInput">
+            </div>
+        </div>
+
+
+        <!-- generowane będzie potem z automatu w pętli-->
+        <div class="row justify-content-center chooseCharacter">
+
+            <!-- generowanie card postaci -->
+            @foreach (var profession in Model)
+            {
+                <div class="col-lg-4 col-sm-6 justify-content-center">s
+                    <div class="card">
+                        <div class="circle">
+                            <img src="@profession.ImageProfessionName2" class="img-fluid" />
+                        </div>
+                        <div class="content">
+                            <h1>@profession.NameProfession</h1>
+                            <p>
+                                @profession.Description
+                            </p>
+                            <button><a href="#">Wybierz</a></button>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+
+    </form>
+</div>

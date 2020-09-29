@@ -1,0 +1,185 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Logowanie";
+}
+
+<header>
+    <center>
+        <h1 class="non-select">Ridentia - Logowanie<br> </h1>
+    </center>
+</header>
+<br />
+<hr>
+
+<div class="row justify-content-center ">
+    <div class="row align-items-center">
+        <div class="col-lg-6 mx-auto">
+            <div class="card text-white bg-login">
+
+
+
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-xl-12">
+
+                            <!--     Captcha       -->
+                            @addTagHelper *, Owl.reCAPTCHA
+                            <!--     Captcha       -->
+
+                            <form asp-route-returnurl="@Model.ReturnUrl" method="post">
+
+                                <hr>
+
+
+                                
+                                <div class="form-group">
+                                    <div class="text-danger"> @ViewData["RegisteredMsg"]</div>
+                                </div>
+
+
+                                <hr>
+
+                                <div class="form-group">
+
+                                    <!--     Captcha       -->
+                                    <input type="hidden" asp-for="Input.token" id="token">
+                                    <!--     Captcha       -->
+
+                                    <center>
+                                        <label asp-for="Input.Email"></label>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                            <input asp-for="Input.Email" class="form-control" placeholder="E-mail" value="" tabindex="1">
+                                        </div>
+
+                                        <span asp-validation-for="Input.Email" class=" text-danger"></span>
+                                    </center>
+
+                                </div>
+
+                                <div class="form-group">
+
+                                    <center>
+                                        <label asp-for="Input.Password"></label>
+
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text"><i class="fa fa-unlock"></i></span>
+                                            <input asp-for="Input.Password" class="form-control" placeholder="Hasło" value="" tabindex="2">
+                                        </div>
+
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </center>
+
+                                </div>
+
+                                <div class="form-group text-center">
+                                    <div class="form-check">
+
+                                        <center>
+                                            <input asp-for="Input.RememberMe" tabindex="3">
+                                            <label class="non-select ml-1" asp-for="Input.RememberMe"></label>
+                                        </center>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <div class="row align-items-center">
+                                        <div class="col-xl-12">
+                                            <div class="text-center">
+                                                <a class="text-center rules1 nav-link" asp-page="./ForgotPassword">Nie pamiętasz hasła? </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <center>
+                                        <button type="submit" tabindex="4" class="text-center active nav-link w-auto">Zaloguj się</button>
+                                    </center>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group">
+                                    <center>
+                                        <a class="text-center rules2 nav-link" asp-area="Identity" asp-page="/Account/Register">Nie masz konta? Zarejestruj się!</a>
+                                    </center>
+                                </div>
+
+
+
+                                <hr>
+
+
+
+                            </form>
+
+                            <!--     Captcha       -->
+                            <recaptcha-script-v3 />
+                            <!--     Captcha       -->
+
+                            <hr>
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <center>
+            <hr>
+            <p class="non-select">
+                „Ridentia” jest Polską grą przeglądarkową wykonywaną przez studio Artoba. <br />
+                Świat ten łączy historię, legendę i fantazję, tworząc żywe środowisko gry RPG.<br />
+                Fabuła gry jest osadzona w świecie fantazyjnym, którą zamieszkują mężni wojownicy, odważni barbarzyńcy, celni łucznicy, bezszelestni zabójcy, leczący druidzi, magiczni magowie.
+                Każdy z nich posiada inną paletę ekwipunku i ataków specjalnych.<br />
+
+            </p>
+            <hr>
+
+            <p class="non-select">
+                Staw czoła potężnym potworom, a także innym przeciwnikom na arenie.<br>
+                Wykonuj różne, niebezpieczne misje, które będą dostarczać nagrody.<br>
+                Zdobywaj złoto i ekwipunek niezbędny do walk.<br>
+                Zbierz drużynę, która będzie walczyć u Twojego boku.<br>
+
+
+                <br />
+
+            </p>
+        </center>
+
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/account/loginregister.css" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!--     Captcha       -->
+    <script>
+        function callback(token) {
+            document.getElementById("token").value = token;
+        }
+    </script>
+    <recaptcha-script-v3-js action="login" callback="callback" />
+    <!--     Captcha       -->
+
+}

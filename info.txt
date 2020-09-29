@@ -1,0 +1,35 @@
+  Navigations 'Backpack.Character' and 'Character.Backpack' 
+Navigations 'Character.CurrentEquipment' and 'CurrentEquipment.Character' 
+Navigations 'Character.Member' and 'Member.Character' 
+ Navigations 'GuildChat.Member' and 'Member.GuildChat'
+Navigations 'Member.Role' and 'Role.Member' 
+
+zostały rozdzielone na dwie relacje, ponieważ ForeignKeyAttribute 
+zostało określone w nawigacjach po obu stronach
+
+ [RaportGuilds] - problem z  [Parameters=[], CommandType='Text', CommandTimeout='30']
+Failed executing DbCommand (126ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+
+Introducing FOREIGN KEY constraint 'FK_RaportGuilds_Guilds_FightWin' on table 'RaportGuilds' 
+may cause cycles or multiple cascade paths. Specify ON DELETE NO ACTION or ON UPDATE NO ACTION, or 
+modify other FOREIGN KEY constraints.
+Could not create constraint or index. See previous errors.
+
+
+problem jest taki ze jak mam friends i chce miec 2 pola z id characterów to mam błąd
+tak samo jest z guild i raportsguild
+
+
+  modelBuilder.Entity<RaportGuild>()
+                  .HasOne<Guild>(s => s.Guild)
+                  .WithMany(g => g.RaportGuilds1)
+                  .HasForeignKey(s => s.GuildID);
+
+            modelBuilder.Entity<RaportGuild>()
+                 .HasOne<Guild>(s => s.Guild)
+                 .WithMany(g => g.RaportGuilds2)
+                 .HasForeignKey(s => s.GuildID2);
+
+
+https://docs.microsoft.com/en-us/aspnet/core/data/ef-mvc/complex-data-model?view=aspnetcore-3.1
+           

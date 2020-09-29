@@ -1,0 +1,178 @@
+﻿body {
+}
+
+/** background start**/
+body, main::before {
+    background: url("../../images/CreateCharacter/background3.jpg") 0/cover fixed;
+    font-family: 'Lato', sans-serif;
+    
+}
+/** background end**/
+
+/** page start **/
+.page {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+}
+.characterNameText {
+    margin-top: 1rem;
+    letter-spacing: .1rem;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #000;
+}
+
+#characterNameInput {
+    margin-top: 2rem;
+}
+
+label, .characterNameText {
+    font: 165%/1.6 Baskerville, Palatino, serif;
+    color: black;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #000;
+}
+/** page end **/
+
+
+/** card second character start **/
+.row .card{
+    margin: 20px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    background-color: rgba(255, 255, 255, 0.5);
+    transition: 0.5s;
+    overflow: hidden;   
+}
+
+.card .circle {
+    width: 100%;
+    clip-path: circle(180px at center 0);
+    background-color: rgba(0,0,0, 0.7);
+    overflow: hidden;
+}
+.card .content{
+    
+}
+.card p{
+    color: #111;
+    padding: .5rem;
+}
+.card .content button{
+    position: relative;
+    padding: 10px 20px;
+    background-color: rgba(0,0,0, 0.7);
+    margin-bottom: 1rem;
+    border-radius: 4rem;
+}
+.card .content button a {
+    text-decoration: none;
+    color: white;
+}
+  /** card second character end **/
+
+  /** mobile start**/
+@media only screen and (max-width: 1200px){
+
+    .card .circle {
+        clip-path: circle(140px at center 0);
+    }
+}
+
+@media only screen and (max-width: 992px) {
+
+    .card .circle {
+        clip-path: circle(160px at center 0);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .card .circle {
+        clip-path: circle(115px at center 0);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    .page {
+        top: 0;
+        margin-bottom: 0;
+    }
+
+    .card .circle {
+        clip-path: circle(110px at center 0);
+    }
+}
+
+@media only screen and (max-width: 576px) {
+
+    .card .circle {
+        clip-path: circle(265px at center 0);
+    }
+}
+
+@media only screen and (max-width: 535px) {
+
+    .card .circle {
+        clip-path: circle(250px at center 0);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+
+    .card .circle {
+        clip-path: circle(230px at center 0);
+    }
+}
+
+@media only screen and (max-width: 460px) {
+
+    .card .circle {
+        clip-path: circle(210px at center 0);
+    }
+}
+
+@media only screen and (max-width: 430px) {
+
+    .card .circle {
+        clip-path: circle(190px at center 0);
+    }
+}
+
+@media only screen and (max-width: 390px) {
+
+    .card .circle {
+        clip-path: circle(170px at center 0);
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+    .card .circle {
+        clip-path: circle(150px at center 0);
+    }
+}
+
+@media only screen and (max-width: 325px) {
+
+    .card .circle {
+        clip-path: circle(130px at center 0);
+    }
+}
+
+@media only screen and (max-width: 295px) {
+
+    .card .circle {
+        clip-path: circle(110px at center 0);
+    }
+}
+
+@media only screen and (max-width: 265px) {
+
+    .card .circle {
+        clip-path: circle(100px at center 0);
+    }
+}
+  /** mobile end**/
