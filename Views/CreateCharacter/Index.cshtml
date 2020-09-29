@@ -30,17 +30,15 @@
             <!-- generowanie card postaci -->
             @foreach (var profession in Model)
             {
-                <div class="col-lg-4 col-sm-6 justify-content-center">
+                <div class="col-lg-4 col-sm-6 justify-content-center">s
                     <div class="card">
                         <div class="circle">
-                            <img src="@profession.ImageProfessionName" class="img-fluid" />
+                            <img src="@profession.ImageProfessionName2" class="img-fluid" />
                         </div>
                         <div class="content">
                             <h1>@profession.NameProfession</h1>
                             <p>
-                                Wojownicy opierają swoją siłę na walce wręcz. Zadają duże obrażenia oraz posiadają większą
-                                ilość pancerza co zwiększa ich wytrzymałość. Ich głównymi atrybutami jest siła, pancerz oraz
-                                obrażenia.
+                                @profession.Description
                             </p>
                             <button><a href="#">Wybierz</a></button>
                         </div>
@@ -48,113 +46,6 @@
                 </div>
             }
 
-            <!-- Wojownik start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/warriorMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Wojownik</h1>
-                        <p>
-                            Wojownicy opierają swoją siłę na walce wręcz. Zadają duże obrażenia oraz posiadają większą
-                            ilość pancerza co zwiększa ich wytrzymałość. Ich głównymi atrybutami jest siła, pancerz oraz
-                            obrażenia.
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Barbarzyńca start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/barbarzyncaMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Barbarzyńca</h1>
-                        <p>
-                            Barbarzyńcy cechują się wielką wytrzymałością. Nie zadają ogromnych obrażeń lecz świetnie sprawdzają
-                            się w walce na pierwszej linii. Ich głównymi atrybutami jest wytrzymałość, Hp oraz pancerz.
-
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- Barbarzyńca end-->
-            <!-- Zabojca start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/zabojcaMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Zabójca</h1>
-                        <p>
-                            Zabójcy to cień każdego przeciwnika. Potrafią oni umiejętnie unikać ciosów, co często daje
-                            im przewagę w walce, ich główną wadą jest wytrzymałość. Cechy na których opierają swoją siłe to
-                            zręczność, siła oraz szybkość ataku.
-
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- Zabojca end-->
-            <!-- Łucznik start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/lucznikMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Łucznik</h1>
-                        <p>
-                            Łucznicy, podczas walki, starają się trzymać z dala od przeciwnika i dzięki swojej broni
-                            atakować ich z odległości. Jest to ważna postać podczas walk drużynowych.
-                            Ich głównymi atrybutami jest zręczność, siła oraz celność ataków.
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- Lucznik end-->
-            <!-- Adept start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/adeptMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Adept</h1>
-                        <p>
-                            Adepci bazują na wiedzy pradawnej. Ich wiedza jest ogromna i potrafią wykorzystać ją, aby skutecznie unieszkodliwiać
-                            swoich wrogów. Ich głównymi atrybutami jest inteligencja, wiedza oraz zadawane obrażenia.
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- Adept end-->
-            <!-- Druid start-->
-            <div class="col-lg-4 col-sm-6 justify-content-center">
-                <div class="card">
-                    <div class="circle">
-                        <img src="~/Images/CreateCharacter/Characters/druidMin.png" class="img-fluid" />
-                    </div>
-                    <div class="content">
-                        <h1>Druid</h1>
-                        <p>
-                            Druidzi są bardzo inteligetni. Wykorzystują swoją wiedzę w celach obronnych tak aby żaden przeciwnik nie mógł
-                            ich skrzywdzić. Są zręczni i mądrzy. Ich głównymi atrybutami jest inteligencja i zręczność.
-                        </p>
-                        <button><a href="#">Wybierz</a></button>
-                    </div>
-                </div>
-            </div>
-            <!-- Druid end-->
         </div>
 
     </form>
