@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,9 @@ namespace Gra_przegladarkowa.Models
         [Required]
         [Range(0,2)]
         public int AccountBan { get; set; }
+        public int? CharacterID { get; set; }
+        [ForeignKey("CharacterID"), Column(Order = 0)]
+        public virtual Character.Character Character { get; set; }
     }
 }
     

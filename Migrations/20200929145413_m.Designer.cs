@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gra_przegladarkowa.Migrations
 {
     [DbContext(typeof(RidentiaDbContext))]
-    [Migration("20200929080953_mig")]
-    partial class mig
+    [Migration("20200929145413_m")]
+    partial class m
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -54,6 +54,9 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int?>("ProfessionID")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ProfileID")
+                        .HasColumnType("int");
+
                     b.Property<int?>("WorkID")
                         .HasColumnType("int");
 
@@ -68,6 +71,8 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasIndex("MemberID");
 
                     b.HasIndex("ProfessionID");
+
+                    b.HasIndex("ProfileID");
 
                     b.HasIndex("WorkID");
 
@@ -810,12 +815,17 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int>("AccountBan")
                         .HasColumnType("int");
 
+                    b.Property<int?>("CharacterID")
+                        .HasColumnType("int");
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(150)")
                         .HasMaxLength(150);
 
                     b.HasKey("ProfileID");
+
+                    b.HasIndex("CharacterID");
 
                     b.ToTable("Profiles");
                 });
@@ -841,6 +851,10 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasOne("Gra_przegladarkowa.Models.Character.Profession", "Profession")
                         .WithMany("Characters")
                         .HasForeignKey("ProfessionID");
+
+                    b.HasOne("Gra_przegladarkowa.Models.Profile", "Profile")
+                        .WithMany()
+                        .HasForeignKey("ProfileID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Character.Work", "Work")
                         .WithMany("Characters")
@@ -1033,6 +1047,13 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasOne("Gra_przegladarkowa.Models.Mission.Monster", null)
                         .WithMany("Monsters")
                         .HasForeignKey("MonsterID1");
+                });
+
+            modelBuilder.Entity("Gra_przegladarkowa.Models.Profile", b =>
+                {
+                    b.HasOne("Gra_przegladarkowa.Models.Character.Character", "Character")
+                        .WithMany()
+                        .HasForeignKey("CharacterID");
                 });
 #pragma warning restore 612, 618
         }

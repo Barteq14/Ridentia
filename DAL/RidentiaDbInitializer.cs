@@ -253,13 +253,14 @@ namespace Gra_przegladarkowa.DAL
             context.SaveChanges();
 
             // works
+            */
             var works = new Work[]
             {
                 new Work { Name = "Farmer" , Description = "Pracujesz jako rolnik , zbierasz plony", RevardExp = 100, RevardGold = 1000, WorkTime = 8 },
-                new Work { Name = "Kowal" , Description = "Tworzysz przedmioty", RevardExp = 50, RevardGold = 1000, WorkTime = 3 },
+                new Work { Name = "Kowal" , Description = "Tworzysz przedmioty niezbędne do walki", RevardExp = 50, RevardGold = 1000, WorkTime = 3 },
                 new Work { Name = "Stajenny" , Description = "Pomagasz przy opiekowaniu się końmi", RevardExp = 200, RevardGold = 1000, WorkTime = 5 },
-                new Work { Name = "Rybak" , Description = "Łowisz ryby", RevardExp = 100, RevardGold = 1000, WorkTime = 2 },
-                new Work { Name = "Piekarz" , Description = "Wypiekasz żywność", RevardExp = 100, RevardGold = 2000, WorkTime = 4 },
+                new Work { Name = "Rybak" , Description = "Łowisz ryby, w ten sposób pomagasz innym w głodzie", RevardExp = 100, RevardGold = 1000, WorkTime = 2 },
+                new Work { Name = "Piekarz" , Description = "Wypiekasz chleb, który jest podstawową żywnością", RevardExp = 100, RevardGold = 2000, WorkTime = 4 },
                 new Work { Name = "Rzeźnik" , Description = "Brudna robota wymagająca twardej ręki", RevardExp = 100, RevardGold = 1500, WorkTime = 10 },
                 new Work { Name = "Najemnik" , Description = "Pracujesz dla szefa w celu wyeliminowania jego przeciwników", RevardExp = 100, RevardGold = 1000, WorkTime = 8 }
             };
@@ -268,7 +269,7 @@ namespace Gra_przegladarkowa.DAL
                 context.Works.Add(w);
             }
             context.SaveChanges();
-
+            
 
             /*################################### GUILD*/
             /*

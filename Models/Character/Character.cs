@@ -42,6 +42,9 @@ namespace Gra_przegladarkowa.Models.Character
         public int? WorkID { get; set; }
         [ForeignKey("WorkID"), Column(Order = 5)]
         public virtual Work Work { get; set; }
+        public int? ProfileID { get; set; }
+        [ForeignKey("ProfileID"), Column(Order = 6)]
+        public virtual Profile Profile { get; set; }
         public virtual ICollection<InvitationsGuild> InvitationsGuilds { get; set; }
         //public virtual ICollection<Message> Messages { get; set; }
         //public virtual ICollection<Friend> Friends { get; set; }

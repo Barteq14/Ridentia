@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gra_przegladarkowa.Migrations
 {
-    public partial class mig : Migration
+    public partial class m : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -128,20 +128,6 @@ namespace Gra_przegladarkowa.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Professions", x => x.ProfessionID);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Profiles",
-                columns: table => new
-                {
-                    ProfileID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(maxLength: 150, nullable: false),
-                    AccountBan = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profiles", x => x.ProfileID);
                 });
 
             migrationBuilder.CreateTable(
@@ -289,7 +275,8 @@ namespace Gra_przegladarkowa.Migrations
                     ProfessionID = table.Column<int>(nullable: true),
                     CurrentEquipmentID = table.Column<int>(nullable: true),
                     BackpackID = table.Column<int>(nullable: true),
-                    WorkID = table.Column<int>(nullable: true)
+                    WorkID = table.Column<int>(nullable: true),
+                    ProfileID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -472,6 +459,27 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    ProfileID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(maxLength: 150, nullable: false),
+                    AccountBan = table.Column<int>(nullable: false),
+                    CharacterID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.ProfileID);
+                    table.ForeignKey(
+                        name: "FK_Profiles_Characters_CharacterID",
+                        column: x => x.CharacterID,
+                        principalTable: "Characters",
+                        principalColumn: "CharacterID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Statistics",
                 columns: table => new
                 {
@@ -638,6 +646,11 @@ namespace Gra_przegladarkowa.Migrations
                 column: "ProfessionID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Characters_ProfileID",
+                table: "Characters",
+                column: "ProfileID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Characters_WorkID",
                 table: "Characters",
                 column: "WorkID");
@@ -748,6 +761,11 @@ namespace Gra_przegladarkowa.Migrations
                 column: "MonsterID1");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Profiles_CharacterID",
+                table: "Profiles",
+                column: "CharacterID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_RaportGuilds_GuildID",
                 table: "RaportGuilds",
                 column: "GuildID");
@@ -805,6 +823,14 @@ namespace Gra_przegladarkowa.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Characters_Profiles_ProfileID",
+                table: "Characters",
+                column: "ProfileID",
+                principalTable: "Profiles",
+                principalColumn: "ProfileID",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Members_GuildChats_GuildChatID",
                 table: "Members",
                 column: "GuildChatID",
@@ -836,6 +862,10 @@ namespace Gra_przegladarkowa.Migrations
                 table: "Members");
 
             migrationBuilder.DropForeignKey(
+                name: "FK_Profiles_Characters_CharacterID",
+                table: "Profiles");
+
+            migrationBuilder.DropForeignKey(
                 name: "FK_GuildChats_Members_MemberID",
                 table: "GuildChats");
 
@@ -863,9 +893,6 @@ namespace Gra_przegladarkowa.Migrations
 
             migrationBuilder.DropTable(
                 name: "Missions");
-
-            migrationBuilder.DropTable(
-                name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "RaportGuilds");
@@ -899,6 +926,9 @@ namespace Gra_przegladarkowa.Migrations
 
             migrationBuilder.DropTable(
                 name: "Professions");
+
+            migrationBuilder.DropTable(
+                name: "Profiles");
 
             migrationBuilder.DropTable(
                 name: "Works");
