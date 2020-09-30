@@ -19,29 +19,34 @@ using Owl.reCAPTCHA.v3;
 using Owl.reCAPTCHA;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
+using Gra_przegladarkowa.Models;
+using Gra_przegladarkowa.DAL;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        
+
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IreCAPTCHASiteVerifyV3 _siteVerify; //captcha
+        private readonly RidentiaDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IreCAPTCHASiteVerifyV3 siteVerify //captcha
+            IreCAPTCHASiteVerifyV3 siteVerify, //captcha
+            RidentiaDbContext context
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _siteVerify = siteVerify;
+            _context = context;
         }
 
         [BindProperty]
@@ -74,13 +79,13 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             public string token { get; set; }
             /*      Captcha     */
 
- 
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
         {
 
-            if(TempData["CheckEmail"] != null)
+            if (TempData["CheckEmail"] != null)
             {
                 ViewData["EmailMsg"] = TempData["CheckEmail"].ToString();
             }
@@ -104,11 +109,11 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
             if (response.Score < 0.5 || response.Success == false) // gdy niski poziom zaufania lub gdy wogóle się nie powiodło
             {
-                _logger.LogInformation("\n "+ "\n " + "token " + response.Success + "  score: " + response.Score + "\n "+ "\n ");
-                TempData["CheckEmail"] = "Nie powiodła się weryfikacja. " +response.Score;
+                _logger.LogInformation("\n " + "\n " + "token " + response.Success + "  score: " + response.Score + "\n " + "\n ");
+                TempData["CheckEmail"] = "Nie powiodła się weryfikacja. " + response.Score;
                 return Page();
             }
-            _logger.LogInformation("Success: " + response.Success + "\t       Score: " + response.Score );
+            _logger.LogInformation("Success: " + response.Success + "\t       Score: " + response.Score);
             /*      Captcha     */
 
 
@@ -132,6 +137,15 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
 
 
+                    Profile profil = new Profile
+                    {
+                        UserName = Input.Email
+                    };
+
+                    _context.Profiles.Add(profil);
+                    await _context.SaveChangesAsync();
+
+
                     string msg = $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Kliknij na link, aby aktywować konto!</a>.";
 
                     email.SendEmail(Input.Email, "Rejestracja - Ridentia", msg);
@@ -140,7 +154,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
-                        
+
                         return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
                     }
                     else
@@ -150,9 +164,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
                     }
                 }
 
-                
 
-                
 
             }
 

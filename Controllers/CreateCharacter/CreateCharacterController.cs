@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Gra_przegladarkowa.DAL;
 using Gra_przegladarkowa.Models.Character;
+using Gra_przegladarkowa.Models.Item;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -38,13 +39,57 @@ namespace Gra_przegladarkowa.Controllers.NewFolder
             if (nameCharacterInput == null || nameCharacterInput.Equals("") || choosenCharacter.Equals(""))
             {
                 return RedirectToAction(nameof(Index));
-
             }
-            //pobieranie aktualnie zalogowanego usera
+            //pobieranie aktualnie zalogowanego usera i profilu
             var actuallyUserName = User.Identity.Name;
             
-            //brakuje await
-            var actuallyProfile = _context.Profiles.Where(p => p.UserName == actuallyUserName);
+            var actuallyProfile = await _context.Profiles.Where(p => p.UserName == actuallyUserName).FirstAsync();
+
+            var actuallyCharacter = await _context.Professions.Where(p => p.NameProfession == choosenCharacter).FirstAsync();
+
+            //Jesteś mądry chłopak 
+            /**
+            Backpack backpack = new Backpack();
+            
+            
+
+            Character character = new Character
+            {
+                NameCharacter = nameCharacterInput,
+                ProfessionID = actuallyCharacter.ProfessionID,
+                ProfileID = actuallyProfile.ProfileID,
+                Gold = 100,
+                FamePoint = 1,
+                LevelID = 1,
+                //BackpackID = backpack.BackpackID
+            };
+            var lastCharacterID = await _context.Characters.Select(p => p );
+            backpack.CharacterID = character.CharacterID;
+            // var backZBazy = await _context.Backpacks.Where(p => p.BackpackID == ???).FirstAsync();
+
+            //tworzenie nowego charactera
+
+
+
+            /*
+            character.NameCharacter = nameCharacterInput;
+            character.ProfileID = actuallyProfile.ProfileID;
+            character.ProfessionID = actuallyCharacter.ProfessionID;
+            character.Gold = 100;
+            character.FamePoint = 1;
+            character.LevelID = 1;
+            //character.BackpackID = backpack.BackpackID;
+            */
+            //character.Backpack.CharacterID = character.CharacterID;
+            /*
+            _context.Backpacks.Add(backpack);
+            await _context.SaveChangesAsync();
+
+            _context.Characters.Add(character);
+            await _context.SaveChangesAsync();
+
+            */
+            
 
             return View();
         }
