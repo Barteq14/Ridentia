@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Gra_przegladarkowa.Models.Character.Work>
-@using System.Linq;
+
 
 @{
     ViewData["Title"] = "Praca";
@@ -9,8 +9,6 @@
     <partial name="_ValidationScriptsPartial" />
     <link rel="stylesheet" href="~/css/wORK/index.css" />
     <script src="~/js/work/index.js"></script>
-
-
 }
 
 
@@ -65,10 +63,14 @@
 
                     <td colspan="3">
                         <div class="text-center">
-                            
-                            <select id="selectElementId">
-                                <option value="0">Wybierz pracę</option>
-                            </select>
+                            <form method="post" asp-controller="Work" asp-action="Work">
+                                <input type="hidden" name="namework" id="chooseworkinput">
+                                <select name="timework" id="selectElementId">
+                                    <option value="0">Wybierz pracę</option>
+                                </select>
+                                <input type="submit" value="Zacznij pracę" class="btn btn-success" />
+
+                            </form>
                         </div>
 
                     </td>

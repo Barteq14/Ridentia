@@ -1,5 +1,4 @@
-﻿
-function myFunction(x) {
+﻿function myFunction(x) {
 
     var str = x.innerHTML;
     var res = str.split(">");
@@ -10,7 +9,9 @@ function myFunction(x) {
     var test = x.textContent;
     
     document.getElementById("choosework").innerHTML = "Pracuj jako: " + res2[1].substring(23);
-    console.log( res2[5].substring(23) );
+    document.getElementById("chooseworkinput").value = res2[1].substring(23);
+
+    //console.log(res2[5].substring(23));
 
     document.getElementById("selectElementId").innerHTML = "";
 
