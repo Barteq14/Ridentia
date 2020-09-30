@@ -1,11 +1,86 @@
-﻿@{
+﻿@model IEnumerable<Gra_przegladarkowa.Models.Character.Work>
+@using System.Linq;
+
+@{
     ViewData["Title"] = "Praca";
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="~/css/wORK/index.css" />
+    <script src="~/js/work/index.js"></script>
+
+
 }
 
 
 
-<div class="text-center">
-    work/index
+
+<center>
+
+    <div class="table-responsive">
+
+        <table class="table-fill tableId">
+            <thead>
+                <tr style="border: 3px solid #9ea7af; border-radius: 2px; text-shadow: 0 0px 0px rgba(256, 256, 256, 0.05);">
+                    <th colspan="2" class="text-center bg-above" style="background: rgba(222, 210, 173, 0.25); color: black; border-top: 0px solid #d7cba0; ">
+                        <h4 style="font-size: 14.56px; font-family: 'Comic Sans MS', 'Comic Sans' , cursive;  ">
+                            Laboratorium Magistratus leży w cieniu następnego budynku.<br style="line-height: 200%; ">
+                            Możesz tam wybrać kilka różnych prac, nie każda z nich jest przyjemna, ale lepsze to niż walka na arenie.<br style="line-height: 200%; ">
+                            Niektóre prace nie są dobrze płatne, ale zawsze możesz otrzymać to, co pozostało po kolejnym dniu handlu.<br style="line-height: 200%; ">
+                        </h4>
+                    </th>
+                    <th colspan="3" class="text-center bg-above" style="background: rgba(222, 210, 173, 0.25) ">
+                        <img class="img-fluid" src="~/Images/Work/work1.jpg" style="width:215px; height: 280px; border-top: 0px solid #d7cba0; background: rgba(222, 210, 173, 0.25)" />
+                    </th>
+                </tr>
+                <tr>
+                    <th class="text-center 2">Nazwa</th>
+                    <th class="text-center 2">Opis</th>
+                    <th class="text-center 2">Czas<br> pracy</th>
+                    <th class="text-center 2">Złoto/h</th>
+                    <th class="text-center 2">Exp/h</th>
+                </tr>
+            </thead>
+
+            <tbody class="table-hover">
+                @foreach (var work in Model)
+                {
+                    <tr onclick="myFunction(this)">
+                        <td class="text-center">@work.Name</td>
+                        <td class="text-center">@work.Description</td>
+                        <td class="text-center">@work.WorkTime</td>
+                        <td class="text-center">@work.RevardGold</td>
+                        <td class="text-center">@work.RevardExp</td>
+                    </tr>
+                }
+
+                <tr>
+                    <td colspan="2">
+                        <div class="text-center">
+                            <span id="choosework"> Wybierz pracę </span><span id="choosetime"></span>
+                        </div>
+
+                    </td>
+
+                    <td colspan="3">
+                        <div class="text-center">
+                            
+                            <select id="selectElementId">
+                                <option value="0">Wybierz pracę</option>
+                            </select>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</center>
 
 
-</div>
+
+
+
