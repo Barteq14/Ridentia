@@ -165,7 +165,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Levels.Add(l);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
             /*
             // messages
             var messages = new Message[]
@@ -239,7 +239,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Professions.Add(p);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
             /*
             // statistics
             var statistics = new Statistic[]
@@ -262,13 +262,14 @@ namespace Gra_przegladarkowa.DAL
                 new Work { Name = "Rybak" , Description = "Łowisz ryby, w ten sposób pomagasz innym w głodzie", RevardExp = 100, RevardGold = 1000, WorkTime = 2 },
                 new Work { Name = "Piekarz" , Description = "Wypiekasz chleb, który jest podstawową żywnością", RevardExp = 100, RevardGold = 2000, WorkTime = 4 },
                 new Work { Name = "Rzeźnik" , Description = "Brudna robota wymagająca twardej ręki", RevardExp = 100, RevardGold = 1500, WorkTime = 10 },
-                new Work { Name = "Najemnik" , Description = "Pracujesz dla szefa w celu wyeliminowania jego przeciwników", RevardExp = 100, RevardGold = 1000, WorkTime = 8 }
+                new Work { Name = "Najemnik" , Description = "Pracujesz dla szefa w celu wyeliminowania jego przeciwników", RevardExp = 100, RevardGold = 1000, WorkTime = 8 },
+                new Work { Name = "Brak pracy" , Description = "Aktualnie nie posiadasz żadnej pracy", RevardExp = 0, RevardGold = 0, WorkTime = 0 }
             };
             foreach (Work w in works)
             {
                 context.Works.Add(w);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
             
 
             /*################################### GUILD*/
@@ -365,7 +366,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Roles.Add(ro);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
 
 
             /*################################### ITEMS*/
@@ -410,7 +411,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.CategoryItems.Add(c);
             }
-            context.SaveChanges();
+            context.SaveChangesAsync();
             /*
             // currentEquipment
             var currentEquipments = new CurrentEquipment[]
