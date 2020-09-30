@@ -44,8 +44,8 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             /*      Captcha     */
         }
 
-
-        public async Task<IActionResult> OnGetAsync()
+        //synchroniczna
+        public IActionResult OnGet()
         {
 
             if (TempData["CheckExist"] != null)
