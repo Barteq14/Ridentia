@@ -20,8 +20,6 @@ namespace Gra_przegladarkowa.Models
         [Required]
         [Range(0,2)]
         public int AccountBan { get; set; }
-        public int? CharacterID { get; set; }
-        [ForeignKey("CharacterID"), Column(Order = 0)]
         public virtual Character.Character Character { get; set; }
     }
 }

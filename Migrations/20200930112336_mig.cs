@@ -8,6 +8,18 @@ namespace Gra_przegladarkowa.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Backpacks",
+                columns: table => new
+                {
+                    BackpackID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Backpacks", x => x.BackpackID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Buildings",
                 columns: table => new
                 {
@@ -37,6 +49,18 @@ namespace Gra_przegladarkowa.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CategoryItems", x => x.CategoryItemID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CurrentEquipment",
+                columns: table => new
+                {
+                    CurrentEquipmentID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CurrentEquipment", x => x.CurrentEquipmentID);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,6 +155,20 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Profiles",
+                columns: table => new
+                {
+                    ProfileID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(maxLength: 150, nullable: false),
+                    AccountBan = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profiles", x => x.ProfileID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Works",
                 columns: table => new
                 {
@@ -204,6 +242,26 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Roles",
+                columns: table => new
+                {
+                    RoleID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NameRole = table.Column<string>(maxLength: 100, nullable: false),
+                    GuildID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Roles", x => x.RoleID);
+                    table.ForeignKey(
+                        name: "FK_Roles_Guilds_GuildID",
+                        column: x => x.GuildID,
+                        principalTable: "Guilds",
+                        principalColumn: "GuildID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Items",
                 columns: table => new
                 {
@@ -242,26 +300,6 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Backpack_Items",
-                columns: table => new
-                {
-                    BackpackItemID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemID = table.Column<int>(nullable: true),
-                    BackpackID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Backpack_Items", x => x.BackpackItemID);
-                    table.ForeignKey(
-                        name: "FK_Backpack_Items_Items_ItemID",
-                        column: x => x.ItemID,
-                        principalTable: "Items",
-                        principalColumn: "ItemID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Characters",
                 columns: table => new
                 {
@@ -270,7 +308,14 @@ namespace Gra_przegladarkowa.Migrations
                     NameCharacter = table.Column<string>(maxLength: 150, nullable: false),
                     FamePoint = table.Column<int>(nullable: false),
                     Gold = table.Column<int>(nullable: false),
-                    MemberID = table.Column<int>(nullable: true),
+                    Strenght = table.Column<int>(nullable: false),
+                    Dexterity = table.Column<int>(nullable: false),
+                    Armor = table.Column<int>(nullable: false),
+                    BlockHit = table.Column<int>(nullable: false),
+                    Resistance = table.Column<int>(nullable: false),
+                    Inteligance = table.Column<int>(nullable: false),
+                    Vitality = table.Column<int>(nullable: false),
+                    Hp = table.Column<int>(nullable: false),
                     LevelID = table.Column<int>(nullable: true),
                     ProfessionID = table.Column<int>(nullable: true),
                     CurrentEquipmentID = table.Column<int>(nullable: true),
@@ -281,6 +326,18 @@ namespace Gra_przegladarkowa.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Characters", x => x.CharacterID);
+                    table.ForeignKey(
+                        name: "FK_Characters_Backpacks_BackpackID",
+                        column: x => x.BackpackID,
+                        principalTable: "Backpacks",
+                        principalColumn: "BackpackID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Characters_CurrentEquipment_CurrentEquipmentID",
+                        column: x => x.CurrentEquipmentID,
+                        principalTable: "CurrentEquipment",
+                        principalColumn: "CurrentEquipmentID",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Characters_Levels_LevelID",
                         column: x => x.LevelID,
@@ -294,6 +351,12 @@ namespace Gra_przegladarkowa.Migrations
                         principalColumn: "ProfessionID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Characters_Profiles_ProfileID",
+                        column: x => x.ProfileID,
+                        principalTable: "Profiles",
+                        principalColumn: "ProfileID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Characters_Works_WorkID",
                         column: x => x.WorkID,
                         principalTable: "Works",
@@ -302,41 +365,55 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Backpacks",
+                name: "Backpack_Items",
                 columns: table => new
                 {
-                    BackpackID = table.Column<int>(nullable: false)
+                    BackpackItemID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CharacterID = table.Column<int>(nullable: false)
+                    ItemID = table.Column<int>(nullable: true),
+                    BackpackID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Backpacks", x => x.BackpackID);
+                    table.PrimaryKey("PK_Backpack_Items", x => x.BackpackItemID);
                     table.ForeignKey(
-                        name: "FK_Backpacks_Characters_CharacterID",
-                        column: x => x.CharacterID,
-                        principalTable: "Characters",
-                        principalColumn: "CharacterID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Backpack_Items_Backpacks_BackpackID",
+                        column: x => x.BackpackID,
+                        principalTable: "Backpacks",
+                        principalColumn: "BackpackID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Backpack_Items_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ItemID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CurrentEquipment",
+                name: "CurrentEquipment_Items",
                 columns: table => new
                 {
-                    CurrentEquipmentID = table.Column<int>(nullable: false)
+                    CurrentEquipmentItemID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CharacterID = table.Column<int>(nullable: false)
+                    ItemID = table.Column<int>(nullable: true),
+                    CurrentEquipmentID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CurrentEquipment", x => x.CurrentEquipmentID);
+                    table.PrimaryKey("PK_CurrentEquipment_Items", x => x.CurrentEquipmentItemID);
                     table.ForeignKey(
-                        name: "FK_CurrentEquipment_Characters_CharacterID",
-                        column: x => x.CharacterID,
-                        principalTable: "Characters",
-                        principalColumn: "CharacterID",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_CurrentEquipment_Items_CurrentEquipment_CurrentEquipmentID",
+                        column: x => x.CurrentEquipmentID,
+                        principalTable: "CurrentEquipment",
+                        principalColumn: "CurrentEquipmentID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CurrentEquipment_Items_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ItemID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -392,6 +469,39 @@ namespace Gra_przegladarkowa.Migrations
                         principalTable: "Guilds",
                         principalColumn: "GuildID",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Members",
+                columns: table => new
+                {
+                    MemberID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GuildID = table.Column<int>(nullable: true),
+                    RoleID = table.Column<int>(nullable: true),
+                    CharacterID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Members", x => x.MemberID);
+                    table.ForeignKey(
+                        name: "FK_Members_Characters_CharacterID",
+                        column: x => x.CharacterID,
+                        principalTable: "Characters",
+                        principalColumn: "CharacterID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_Guilds_GuildID",
+                        column: x => x.GuildID,
+                        principalTable: "Guilds",
+                        principalColumn: "GuildID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Members_Roles_RoleID",
+                        column: x => x.RoleID,
+                        principalTable: "Roles",
+                        principalColumn: "RoleID",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -459,27 +569,6 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profiles",
-                columns: table => new
-                {
-                    ProfileID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(maxLength: 150, nullable: false),
-                    AccountBan = table.Column<int>(nullable: false),
-                    CharacterID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profiles", x => x.ProfileID);
-                    table.ForeignKey(
-                        name: "FK_Profiles_Characters_CharacterID",
-                        column: x => x.CharacterID,
-                        principalTable: "Characters",
-                        principalColumn: "CharacterID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Statistics",
                 columns: table => new
                 {
@@ -504,60 +593,6 @@ namespace Gra_przegladarkowa.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CurrentEquipment_Items",
-                columns: table => new
-                {
-                    CurrentEquipmentItemID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ItemID = table.Column<int>(nullable: true),
-                    CurrentEquipmentID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CurrentEquipment_Items", x => x.CurrentEquipmentItemID);
-                    table.ForeignKey(
-                        name: "FK_CurrentEquipment_Items_CurrentEquipment_CurrentEquipmentID",
-                        column: x => x.CurrentEquipmentID,
-                        principalTable: "CurrentEquipment",
-                        principalColumn: "CurrentEquipmentID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_CurrentEquipment_Items_Items_ItemID",
-                        column: x => x.ItemID,
-                        principalTable: "Items",
-                        principalColumn: "ItemID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Members",
-                columns: table => new
-                {
-                    MemberID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    GuildID = table.Column<int>(nullable: true),
-                    GuildChatID = table.Column<int>(nullable: true),
-                    RoleID = table.Column<int>(nullable: true),
-                    CharacterID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Members", x => x.MemberID);
-                    table.ForeignKey(
-                        name: "FK_Members_Characters_CharacterID",
-                        column: x => x.CharacterID,
-                        principalTable: "Characters",
-                        principalColumn: "CharacterID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Members_Guilds_GuildID",
-                        column: x => x.GuildID,
-                        principalTable: "Guilds",
-                        principalColumn: "GuildID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "GuildChats",
                 columns: table => new
                 {
@@ -578,33 +613,6 @@ namespace Gra_przegladarkowa.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Roles",
-                columns: table => new
-                {
-                    RoleID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NameRole = table.Column<string>(maxLength: 100, nullable: false),
-                    GuildID = table.Column<int>(nullable: true),
-                    MemberID = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Roles", x => x.RoleID);
-                    table.ForeignKey(
-                        name: "FK_Roles_Guilds_GuildID",
-                        column: x => x.GuildID,
-                        principalTable: "Guilds",
-                        principalColumn: "GuildID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Roles_Members_MemberID",
-                        column: x => x.MemberID,
-                        principalTable: "Members",
-                        principalColumn: "MemberID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Backpack_Items_BackpackID",
                 table: "Backpack_Items",
@@ -616,29 +624,23 @@ namespace Gra_przegladarkowa.Migrations
                 column: "ItemID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Backpacks_CharacterID",
-                table: "Backpacks",
-                column: "CharacterID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Characters_BackpackID",
                 table: "Characters",
-                column: "BackpackID");
+                column: "BackpackID",
+                unique: true,
+                filter: "[BackpackID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_CurrentEquipmentID",
                 table: "Characters",
-                column: "CurrentEquipmentID");
+                column: "CurrentEquipmentID",
+                unique: true,
+                filter: "[CurrentEquipmentID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_LevelID",
                 table: "Characters",
                 column: "LevelID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Characters_MemberID",
-                table: "Characters",
-                column: "MemberID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_ProfessionID",
@@ -648,17 +650,14 @@ namespace Gra_przegladarkowa.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_ProfileID",
                 table: "Characters",
-                column: "ProfileID");
+                column: "ProfileID",
+                unique: true,
+                filter: "[ProfileID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Characters_WorkID",
                 table: "Characters",
                 column: "WorkID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CurrentEquipment_CharacterID",
-                table: "CurrentEquipment",
-                column: "CharacterID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CurrentEquipment_Items_CurrentEquipmentID",
@@ -693,7 +692,8 @@ namespace Gra_przegladarkowa.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_GuildChats_MemberID",
                 table: "GuildChats",
-                column: "MemberID");
+                column: "MemberID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_InvitationsGuilds_CharacterID",
@@ -718,12 +718,9 @@ namespace Gra_przegladarkowa.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Members_CharacterID",
                 table: "Members",
-                column: "CharacterID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Members_GuildChatID",
-                table: "Members",
-                column: "GuildChatID");
+                column: "CharacterID",
+                unique: true,
+                filter: "[CharacterID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Members_GuildID",
@@ -733,7 +730,9 @@ namespace Gra_przegladarkowa.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Members_RoleID",
                 table: "Members",
-                column: "RoleID");
+                column: "RoleID",
+                unique: true,
+                filter: "[RoleID] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Messages_Character2CharacterID",
@@ -761,11 +760,6 @@ namespace Gra_przegladarkowa.Migrations
                 column: "MonsterID1");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Profiles_CharacterID",
-                table: "Profiles",
-                column: "CharacterID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RaportGuilds_GuildID",
                 table: "RaportGuilds",
                 column: "GuildID");
@@ -781,98 +775,13 @@ namespace Gra_przegladarkowa.Migrations
                 column: "GuildID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Roles_MemberID",
-                table: "Roles",
-                column: "MemberID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Statistics_CharacterID",
                 table: "Statistics",
                 column: "CharacterID");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Backpack_Items_Backpacks_BackpackID",
-                table: "Backpack_Items",
-                column: "BackpackID",
-                principalTable: "Backpacks",
-                principalColumn: "BackpackID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Characters_Backpacks_BackpackID",
-                table: "Characters",
-                column: "BackpackID",
-                principalTable: "Backpacks",
-                principalColumn: "BackpackID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Characters_CurrentEquipment_CurrentEquipmentID",
-                table: "Characters",
-                column: "CurrentEquipmentID",
-                principalTable: "CurrentEquipment",
-                principalColumn: "CurrentEquipmentID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Characters_Members_MemberID",
-                table: "Characters",
-                column: "MemberID",
-                principalTable: "Members",
-                principalColumn: "MemberID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Characters_Profiles_ProfileID",
-                table: "Characters",
-                column: "ProfileID",
-                principalTable: "Profiles",
-                principalColumn: "ProfileID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Members_GuildChats_GuildChatID",
-                table: "Members",
-                column: "GuildChatID",
-                principalTable: "GuildChats",
-                principalColumn: "GuildChatID",
-                onDelete: ReferentialAction.Restrict);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Members_Roles_RoleID",
-                table: "Members",
-                column: "RoleID",
-                principalTable: "Roles",
-                principalColumn: "RoleID",
-                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Characters_Backpacks_BackpackID",
-                table: "Characters");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_CurrentEquipment_Characters_CharacterID",
-                table: "CurrentEquipment");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Members_Characters_CharacterID",
-                table: "Members");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Profiles_Characters_CharacterID",
-                table: "Profiles");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_GuildChats_Members_MemberID",
-                table: "GuildChats");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Roles_Members_MemberID",
-                table: "Roles");
-
             migrationBuilder.DropTable(
                 name: "Backpack_Items");
 
@@ -884,6 +793,9 @@ namespace Gra_przegladarkowa.Migrations
 
             migrationBuilder.DropTable(
                 name: "Guild_Buildings");
+
+            migrationBuilder.DropTable(
+                name: "GuildChats");
 
             migrationBuilder.DropTable(
                 name: "InvitationsGuilds");
@@ -907,16 +819,22 @@ namespace Gra_przegladarkowa.Migrations
                 name: "Buildings");
 
             migrationBuilder.DropTable(
+                name: "Members");
+
+            migrationBuilder.DropTable(
                 name: "Monsters");
 
             migrationBuilder.DropTable(
                 name: "CategoryItems");
 
             migrationBuilder.DropTable(
-                name: "Backpacks");
+                name: "Characters");
 
             migrationBuilder.DropTable(
-                name: "Characters");
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Backpacks");
 
             migrationBuilder.DropTable(
                 name: "CurrentEquipment");
@@ -932,15 +850,6 @@ namespace Gra_przegladarkowa.Migrations
 
             migrationBuilder.DropTable(
                 name: "Works");
-
-            migrationBuilder.DropTable(
-                name: "Members");
-
-            migrationBuilder.DropTable(
-                name: "GuildChats");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "Guilds");

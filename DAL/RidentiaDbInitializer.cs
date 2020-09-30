@@ -165,7 +165,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Levels.Add(l);
             }
-            context.SaveChangesAsync();
+            context.SaveChanges();
             /*
             // messages
             var messages = new Message[]
@@ -239,7 +239,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Professions.Add(p);
             }
-            context.SaveChangesAsync();
+            context.SaveChanges();
             /*
             // statistics
             var statistics = new Statistic[]
@@ -269,7 +269,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Works.Add(w);
             }
-            context.SaveChangesAsync();
+            context.SaveChanges();
             
 
             /*################################### GUILD*/
@@ -366,7 +366,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.Roles.Add(ro);
             }
-            context.SaveChangesAsync();
+            context.SaveChanges();
 
 
             /*################################### ITEMS*/
@@ -411,7 +411,7 @@ namespace Gra_przegladarkowa.DAL
             {
                 context.CategoryItems.Add(c);
             }
-            context.SaveChangesAsync();
+            context.SaveChanges();
             /*
             // currentEquipment
             var currentEquipments = new CurrentEquipment[]

@@ -15,8 +15,6 @@ namespace Gra_przegladarkowa.Models.Guild
         public int? GuildID { get; set; }
         [ForeignKey("GuildID"), Column(Order = 0)]
         public virtual Guild Guild { get; set; }
-        public int? GuildChatID { get; set; }
-        [ForeignKey("GuildChatID"), Column(Order = 1)]
         public virtual GuildChat GuildChat { get; set; }
         //Guild chat  - members  1 czat ma wielu członkow chyba
         public int? RoleID { get; set; }

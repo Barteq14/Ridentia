@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gra_przegladarkowa.Migrations
 {
     [DbContext(typeof(RidentiaDbContext))]
-    [Migration("20200930090209_mig")]
+    [Migration("20200930112336_mig")]
     partial class mig
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,10 +28,19 @@ namespace Gra_przegladarkowa.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("Armor")
+                        .HasColumnType("int");
+
                     b.Property<int?>("BackpackID")
                         .HasColumnType("int");
 
+                    b.Property<int>("BlockHit")
+                        .HasColumnType("int");
+
                     b.Property<int?>("CurrentEquipmentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dexterity")
                         .HasColumnType("int");
 
                     b.Property<int>("FamePoint")
@@ -40,10 +49,13 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int>("Gold")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LevelID")
+                    b.Property<int>("Hp")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MemberID")
+                    b.Property<int>("Inteligance")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LevelID")
                         .HasColumnType("int");
 
                     b.Property<string>("NameCharacter")
@@ -57,22 +69,35 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int?>("ProfileID")
                         .HasColumnType("int");
 
+                    b.Property<int>("Resistance")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Strenght")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Vitality")
+                        .HasColumnType("int");
+
                     b.Property<int?>("WorkID")
                         .HasColumnType("int");
 
                     b.HasKey("CharacterID");
 
-                    b.HasIndex("BackpackID");
+                    b.HasIndex("BackpackID")
+                        .IsUnique()
+                        .HasFilter("[BackpackID] IS NOT NULL");
 
-                    b.HasIndex("CurrentEquipmentID");
+                    b.HasIndex("CurrentEquipmentID")
+                        .IsUnique()
+                        .HasFilter("[CurrentEquipmentID] IS NOT NULL");
 
                     b.HasIndex("LevelID");
 
-                    b.HasIndex("MemberID");
-
                     b.HasIndex("ProfessionID");
 
-                    b.HasIndex("ProfileID");
+                    b.HasIndex("ProfileID")
+                        .IsUnique()
+                        .HasFilter("[ProfileID] IS NOT NULL");
 
                     b.HasIndex("WorkID");
 
@@ -390,7 +415,8 @@ namespace Gra_przegladarkowa.Migrations
 
                     b.HasKey("GuildChatID");
 
-                    b.HasIndex("MemberID");
+                    b.HasIndex("MemberID")
+                        .IsUnique();
 
                     b.ToTable("GuildChats");
                 });
@@ -457,9 +483,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int?>("CharacterID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("GuildChatID")
-                        .HasColumnType("int");
-
                     b.Property<int?>("GuildID")
                         .HasColumnType("int");
 
@@ -468,13 +491,15 @@ namespace Gra_przegladarkowa.Migrations
 
                     b.HasKey("MemberID");
 
-                    b.HasIndex("CharacterID");
-
-                    b.HasIndex("GuildChatID");
+                    b.HasIndex("CharacterID")
+                        .IsUnique()
+                        .HasFilter("[CharacterID] IS NOT NULL");
 
                     b.HasIndex("GuildID");
 
-                    b.HasIndex("RoleID");
+                    b.HasIndex("RoleID")
+                        .IsUnique()
+                        .HasFilter("[RoleID] IS NOT NULL");
 
                     b.ToTable("Members");
                 });
@@ -520,9 +545,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int?>("GuildID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MemberID")
-                        .HasColumnType("int");
-
                     b.Property<string>("NameRole")
                         .IsRequired()
                         .HasColumnType("nvarchar(100)")
@@ -531,8 +553,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasKey("RoleID");
 
                     b.HasIndex("GuildID");
-
-                    b.HasIndex("MemberID");
 
                     b.ToTable("Roles");
                 });
@@ -544,12 +564,7 @@ namespace Gra_przegladarkowa.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnType("int");
-
                     b.HasKey("BackpackID");
-
-                    b.HasIndex("CharacterID");
 
                     b.ToTable("Backpacks");
                 });
@@ -600,12 +615,7 @@ namespace Gra_przegladarkowa.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CharacterID")
-                        .HasColumnType("int");
-
                     b.HasKey("CurrentEquipmentID");
-
-                    b.HasIndex("CharacterID");
 
                     b.ToTable("CurrentEquipment");
                 });
@@ -815,9 +825,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.Property<int>("AccountBan")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CharacterID")
-                        .HasColumnType("int");
-
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(150)")
@@ -825,36 +832,30 @@ namespace Gra_przegladarkowa.Migrations
 
                     b.HasKey("ProfileID");
 
-                    b.HasIndex("CharacterID");
-
                     b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("Gra_przegladarkowa.Models.Character.Character", b =>
                 {
                     b.HasOne("Gra_przegladarkowa.Models.Item.Backpack", "Backpack")
-                        .WithMany()
-                        .HasForeignKey("BackpackID");
+                        .WithOne("Character")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Character.Character", "BackpackID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Item.CurrentEquipment", "CurrentEquipment")
-                        .WithMany()
-                        .HasForeignKey("CurrentEquipmentID");
+                        .WithOne("Character")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Character.Character", "CurrentEquipmentID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Character.Level", "Level")
                         .WithMany("Characters")
                         .HasForeignKey("LevelID");
-
-                    b.HasOne("Gra_przegladarkowa.Models.Guild.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Character.Profession", "Profession")
                         .WithMany("Characters")
                         .HasForeignKey("ProfessionID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Profile", "Profile")
-                        .WithMany()
-                        .HasForeignKey("ProfileID");
+                        .WithOne("Character")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Character.Character", "ProfileID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Character.Work", "Work")
                         .WithMany("Characters")
@@ -895,8 +896,8 @@ namespace Gra_przegladarkowa.Migrations
             modelBuilder.Entity("Gra_przegladarkowa.Models.Guild.GuildChat", b =>
                 {
                     b.HasOne("Gra_przegladarkowa.Models.Guild.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID")
+                        .WithOne("GuildChat")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Guild.GuildChat", "MemberID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -934,20 +935,16 @@ namespace Gra_przegladarkowa.Migrations
             modelBuilder.Entity("Gra_przegladarkowa.Models.Guild.Member", b =>
                 {
                     b.HasOne("Gra_przegladarkowa.Models.Character.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID");
-
-                    b.HasOne("Gra_przegladarkowa.Models.Guild.GuildChat", "GuildChat")
-                        .WithMany()
-                        .HasForeignKey("GuildChatID");
+                        .WithOne("Member")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Guild.Member", "CharacterID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Guild.Guild", "Guild")
                         .WithMany()
                         .HasForeignKey("GuildID");
 
                     b.HasOne("Gra_przegladarkowa.Models.Guild.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleID");
+                        .WithOne("Member")
+                        .HasForeignKey("Gra_przegladarkowa.Models.Guild.Member", "RoleID");
                 });
 
             modelBuilder.Entity("Gra_przegladarkowa.Models.Guild.RaportGuild", b =>
@@ -966,19 +963,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasOne("Gra_przegladarkowa.Models.Guild.Guild", "Guild")
                         .WithMany()
                         .HasForeignKey("GuildID");
-
-                    b.HasOne("Gra_przegladarkowa.Models.Guild.Member", "Member")
-                        .WithMany()
-                        .HasForeignKey("MemberID");
-                });
-
-            modelBuilder.Entity("Gra_przegladarkowa.Models.Item.Backpack", b =>
-                {
-                    b.HasOne("Gra_przegladarkowa.Models.Character.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Gra_przegladarkowa.Models.Item.Backpack_Item", b =>
@@ -990,15 +974,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasOne("Gra_przegladarkowa.Models.Item.Item", "Item")
                         .WithMany("Backpack_Items")
                         .HasForeignKey("ItemID");
-                });
-
-            modelBuilder.Entity("Gra_przegladarkowa.Models.Item.CurrentEquipment", b =>
-                {
-                    b.HasOne("Gra_przegladarkowa.Models.Character.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Gra_przegladarkowa.Models.Item.CurrentEquipment_Item", b =>
@@ -1047,13 +1022,6 @@ namespace Gra_przegladarkowa.Migrations
                     b.HasOne("Gra_przegladarkowa.Models.Mission.Monster", null)
                         .WithMany("Monsters")
                         .HasForeignKey("MonsterID1");
-                });
-
-            modelBuilder.Entity("Gra_przegladarkowa.Models.Profile", b =>
-                {
-                    b.HasOne("Gra_przegladarkowa.Models.Character.Character", "Character")
-                        .WithMany()
-                        .HasForeignKey("CharacterID");
                 });
 #pragma warning restore 612, 618
         }
