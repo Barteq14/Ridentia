@@ -24,8 +24,30 @@ namespace Gra_przegladarkowa.Models.Character
         [Required]
         [Range(0, 999999999)]
         public int Gold { get; set; }
-        public int? MemberID { get; set; }
-        [ForeignKey("MemberID"),Column( Order = 0)]
+        [Required]
+        [Range(0, 1000)]
+        public int Strenght { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Dexterity { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Armor { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int BlockHit { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Resistance { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Inteligance { get; set; }
+        [Required]
+        [Range(0, 1000)]
+        public int Vitality { get; set; }
+        [Required]
+        [Range(0, 10000000)]
+        public int Hp { get; set; }
         public virtual Member Member { get; set; }
         public int? LevelID { get; set; }
         [ForeignKey("LevelID"), Column(Order = 1)]

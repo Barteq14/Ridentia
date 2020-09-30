@@ -12,8 +12,6 @@ namespace Gra_przegladarkowa.Models.Item
         [Key]
         [Required]
         public int BackpackID { get; set; }
-        public int CharacterID { get; set; }
-        [ForeignKey("CharacterID")]
         public virtual Character.Character Character { get; set; }
         public virtual ICollection<Backpack_Item> Backpack_Items { get; set; }
     }

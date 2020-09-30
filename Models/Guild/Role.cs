@@ -19,8 +19,6 @@ namespace Gra_przegladarkowa.Models.Guild
         public int? GuildID { get; set; }
         [ForeignKey("GuildID"), Column(Order = 0)]
         public virtual Guild Guild { get; set; }
-        public int? MemberID { get; set; }
-        [ForeignKey("MemberID"), Column(Order = 1)]
         public virtual Member Member { get; set; }
     }
 }
