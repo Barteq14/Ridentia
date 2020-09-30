@@ -19,6 +19,8 @@ using Owl.reCAPTCHA.v3;
 using Owl.reCAPTCHA;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.DependencyInjection;
+using Gra_przegladarkowa.Models;
+using Gra_przegladarkowa.DAL;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 {
@@ -30,18 +32,21 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IreCAPTCHASiteVerifyV3 _siteVerify; //captcha
+        private readonly RidentiaDbContext _context;
 
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IreCAPTCHASiteVerifyV3 siteVerify //captcha
+            IreCAPTCHASiteVerifyV3 siteVerify, //captcha
+            RidentiaDbContext context
             )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _siteVerify = siteVerify;
+            _context = context;
         }
 
         [BindProperty]
@@ -130,6 +135,15 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
 
                     SendMail email = new SendMail();
 
+
+
+                    Profile profil = new Profile
+                    {
+                        UserName = Input.Email
+                    };
+
+                    _context.Profiles.Add(profil);
+                    await _context.SaveChangesAsync();
 
 
                     string msg = $"<a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>Kliknij na link, aby aktywować konto!</a>.";
