@@ -40,7 +40,7 @@ namespace Gra_przegladarkowa.Controllers.CreateCharacter
 
             if (isUserBlocked == true)
             {
-                return RedirectToAction("Load", "Index");
+                return RedirectToAction("Work");
             }
 
             var work = await _context.Works.Select(p => p).ToListAsync();

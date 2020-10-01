@@ -1,0 +1,35 @@
+﻿body {
+    background: url("../../images/work/paper.jpg") 0/cover fixed;
+}
+
+h1 {
+
+    color: white;
+    text-shadow: -2.2px -2.2px 0 black, 2.2px -2.2px 0 black, -2.2px 2.2px 0 black, 2.2px 2.2px 0 black;
+    font-size: 54px;
+}
+
+h2 {
+    color: white;
+    text-shadow: -2px -2px 0 black, 2px -2px 0 black, -2px 2px 0 black, 2px 2px 0 black;
+    font-size: 36px;
+}
+
+.testbutton {
+    font-family: "Roboto", helvetica, arial, sans-serif;
+    font-size: 30px;
+    color: #000000 !important;
+    text-shadow: 1px 1px 0px #83DE89;
+    box-shadow: 1px 1px 1px #BEE2F9;
+    padding: 10px 25px;
+    border-radius: 17px;
+    border: 2px solid #05A300;
+    background: #06C200;
+    background: linear-gradient(to top, #06C200, #24DB30);
+}
+
+.testbutton:hover {
+    color: #14396A !important;
+    background: #24DB30;
+    background: linear-gradient(to top, #24DB30, #06C200);
+}
