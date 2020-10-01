@@ -5,25 +5,24 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/work/work.js"></script>
+    <link rel="stylesheet" href="~/css/wORK/work.css" />
 }
 
 
 
-<div class="text-center">
-
-
-    <br>
-
-    <h1>
-        Będziesz mógł ukończyć pracę o dacie:
-        <span id="expireData">@ViewData["expireDate"]</span>
-    </h1>
-    <a href="@Url.Action("Cancel","Work")" type="submit" class="btn btn-danger">Anuluj</a>
-
-
-    <p id="dateCount"></p>
-
-
-
-
-</div>
+<center>
+    <section>
+        <div class="container" style="margin-top: 9%;">
+            
+                <div class="form-group">
+                    <h2 class="">Będziesz mógł rozpocząć pracę w terminie <span id="expireData">@ViewData["expireDate"]</span></h2>
+                </div>
+                <div class="form-group">
+                    <h1 class=""><span id="dateCount">Będziesz mógł pracować za</span></h1>
+                </div>
+                <div class="form-group">
+                    <a href="@Url.Action("Cancel","Work")" type="submit" class="testbutton">Anuluj</a>
+                </div>
+        </div>
+    </section>
+</center>

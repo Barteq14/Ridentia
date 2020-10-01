@@ -28,7 +28,12 @@ namespace Gra_przegladarkowa.Controllers.CreateCharacter
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Work>>> Index()
         {
-            var work = await _context.Works.Select(p => p).ToListAsync();
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData["CheckConfirm"] = "Musisz się zalogować, aby móc pracować. ";
+
+                return RedirectToPage("/Account/Login", new { area = "Identity" });
+            }
 
             var user = await _userManager.GetUserAsync(User); //user
             var isUserBlocked = await _userManager.IsLockedOutAsync(user); //czy locked
@@ -36,8 +41,9 @@ namespace Gra_przegladarkowa.Controllers.CreateCharacter
             if (isUserBlocked == true)
             {
                 return RedirectToAction("Work");
-                //return RedirectToPage("./Work");
             }
+
+            var work = await _context.Works.Select(p => p).ToListAsync();
 
             return View("Index", work);
         }

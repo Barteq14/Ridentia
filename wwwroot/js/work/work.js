@@ -17,25 +17,25 @@ var myfunc = setInterval(function () {
 
     // Result is output to the specific element
     if (days > 0) {
-        document.getElementById("dateCount").innerHTML = "Praca zakończy się za " + days + " dni, " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
+        document.getElementById("dateCount").innerHTML = "Będziesz mógł pracować za " + days + " dni, " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
     }
     if (days == 0 && hours > 0) {
-        document.getElementById("dateCount").innerHTML = "Praca zakończy się za " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
+        document.getElementById("dateCount").innerHTML = "Będziesz mógł pracować za " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
     }
     else if (days == 0 && hours == 0 && minutes > 0) {
-        document.getElementById("dateCount").innerHTML = "Praca zakończy się za " + minutes + " minut i " + seconds + " sekund";
+        document.getElementById("dateCount").innerHTML = "Będziesz mógł pracować za " + minutes + " minut i " + seconds + " sekund";
     }
     else if (days == 0 && hours == 0 && minutes == 0) {
-        document.getElementById("dateCount").innerHTML = "Praca zakończy się za " + seconds + " sekund";
+        document.getElementById("dateCount").innerHTML = "Będziesz mógł pracować za " + seconds + " sekund";
     }
     else {
-        document.getElementById("dateCount").innerHTML = "Praca zakończy się za " + days + " dni, " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
+        document.getElementById("dateCount").innerHTML = "Będziesz mógł pracować za " + days + " dni, " + hours + " godzin, " + minutes + " minut i " + seconds + " sekund";
     }
 
     // Display the message when countdown is over
     if (timeleft < 0) {
         clearInterval(myfunc);
-        document.getElementById("dateCount").innerHTML = ""
+        document.getElementById("dateCount").innerHTML = "Możesz już pracować. Następuje przekierowanie."
         window.location.href = '/Work/Index';
     }
 
