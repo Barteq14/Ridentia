@@ -39,13 +39,13 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
             {
-                return NotFound($"Unable to load user with email '{email}'.");
+                return NotFound($"Nie można znaleźć użytkownika o e-mailu '{email}'.");
             }
 
             Email = email;
 
 
-            TempData["CheckEmail"] = "Aby aktywować konto musisz wejść na email i wejść w link aktywacyjny! ";
+            TempData["CheckEmail"] = "Na e-mail został wysłany link z aktywacją konta. ";
 
             return RedirectToPage("/Account/Register", new { area = "Identity" });
 

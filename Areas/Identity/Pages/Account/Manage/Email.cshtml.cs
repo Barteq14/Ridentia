@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Gra_przegladarkowa.Services;
 
 namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
 {
@@ -17,16 +18,14 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly IEmailSender _emailSender;
 
         public EmailModel(
             UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
-            IEmailSender emailSender)
+            SignInManager<IdentityUser> signInManager
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
         }
 
         public string Username { get; set; }
@@ -45,7 +44,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
         {
             [Required]
             [EmailAddress]
-            [Display(Name = "New email")]
+            [Display(Name = "Nowy E-mail")]
             public string NewEmail { get; set; }
         }
 
@@ -53,11 +52,12 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
         {
             var email = await _userManager.GetEmailAsync(user);
             Email = email;
-
+            
             Input = new InputModel
             {
                 NewEmail = email,
             };
+            
 
             IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
         }
@@ -67,7 +67,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można znaleźć użytkownika z ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -79,12 +79,14 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                StatusMessage = "dupaa.";
+                return NotFound($"Nie można znaleźć użytkownika z ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
             {
                 await LoadAsync(user);
+                StatusMessage = "dupa.";
                 return Page();
             }
 
@@ -98,16 +100,20 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
                     pageHandler: null,
                     values: new { userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                
+                
+                SendMail emails = new SendMail();
+                string msg = $"Aby zmienić Email <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.";
+                emails.SendEmail(Input.NewEmail, "Zmiana emaila - Ridentia", msg);
 
-                StatusMessage = "Confirmation link to change email sent. Please check your email.";
+
+                
+
+                StatusMessage = "E-mail z potwierdzeniem został wysłany na nową pocztę..";
                 return RedirectToPage();
             }
 
-            StatusMessage = "Your email is unchanged.";
+            StatusMessage = "E-mail nie zmieniony.";
             return RedirectToPage();
         }
 
@@ -116,7 +122,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można znaleźć użytkownika z ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -134,12 +140,13 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
                 pageHandler: null,
                 values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
-            StatusMessage = "Verification email sent. Please check your email.";
+            SendMail emails = new SendMail();
+            string msg = $"Aby aktywować konto <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>kliknij tutaj</a>.";
+            emails.SendEmail(Input.NewEmail, "Aktywacja konta - Ridentia", msg);
+
+
+            StatusMessage = "Na stary e-mail został wysłany link z aktywacją konta.";
             return RedirectToPage();
         }
     }
