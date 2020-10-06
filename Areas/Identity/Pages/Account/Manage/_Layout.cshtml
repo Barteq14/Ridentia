@@ -13,34 +13,45 @@
 @section Scripts {
     @RenderSection("Scripts", required: false)
     <link rel="stylesheet" href="~/css/account/Manage/layout.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="~/js/manage/layout.js"></script>
+
+
 }
 
+<div class="bigger-panel">
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-3 ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 yellow-panel">
 
-            <ul class="nav nav-pills flex-column test">
+                <ul class="nav nav-pills flex-column test">
 
-                <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Profile</a></li>
-                <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Email</a></li>
-                <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Password</a></li>
-                <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
-                <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Personal data</a></li>
+                    <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">Index / nr tel</a></li>
+                    <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">Zmiana E-mail</a></li>
+                    <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">Zmiana hasła</a></li>
+                    <!--
+                    <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">Two-factor authentication</a></li>
+                     -->
+                    <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">Pobierz dane konta / usuń konto</a></li>
 
-            </ul>
+                </ul>
+            </div>
+
+            <div class="col-md-9 white-panel">
+
+                @RenderBody()
+
+            </div>
+
         </div>
-
-
-        <div class="col-md-9">
-
-            @RenderBody()
-
-        </div>
-
-
     </div>
+
 </div>
+
+
+
+
 
 
 

@@ -72,7 +72,7 @@
     height: 400px;
 }
 
-.col-md-3 {
+.yellow-panel {
     background: rgba(244,193,40,0.90);
     padding: 4%;
     border-top-left-radius: 0.8rem;
@@ -84,7 +84,7 @@
 }
 
 
-.col-md-9 {
+.white-panel {
     background-color: rgba(206,206,206,0.90);
     padding: 3%;
     border-top-right-radius: 0.8rem;

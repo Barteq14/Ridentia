@@ -8,11 +8,11 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
 {
     public static class ManageNavPages
     {
-        public static string Index => "Index";
+        public static string Index => "Index / nr tel";
 
-        public static string Email => "Email";
+        public static string Email => "Zmiana E-mail";
 
-        public static string ChangePassword => "ChangePassword";
+        public static string ChangePassword => "Zmiana hasła";
 
         public static string DownloadPersonalData => "DownloadPersonalData";
 
@@ -20,7 +20,7 @@ namespace Gra_przegladarkowa.Areas.Identity.Pages.Account.Manage
 
         public static string ExternalLogins => "ExternalLogins";
 
-        public static string PersonalData => "PersonalData";
+        public static string PersonalData => "Pobierz dane konta / usuń konto";
 
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 

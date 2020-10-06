@@ -1,0 +1,46 @@
+﻿@page
+@model DeletePersonalDataModel
+@{
+    ViewData["Title"] = "Usuwanie konto";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+
+<h1 class="text-center h1s">Możesz tutaj usunąć konto</h1>
+<br>
+
+
+<form class="col-lg-6 offset-lg-3 " id="delete-user" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="row justify-content-center">
+
+        @if (Model.RequirePassword)
+        {
+        <div class="form-group">
+            <label class="text-center labels">Wpisz hasło</label>
+            <div class="input-group mb-3">
+                <div class="soft-codeon">
+                    <i class="fa fa-key icon"></i>
+                    <input asp-for="Input.Password" class=" form-control soft-field"  />
+                </div>
+            </div>
+        </div>
+        }
+
+ 
+    </div>
+
+    <div class="row justify-content-center form-group text-center">
+        <button id="update-profile-button" type="submit" class="btn btn-primary">Zapisz zmiany</button>
+    </div>
+
+</form>
+
+
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
